@@ -46,6 +46,8 @@ Here's how to troubleshoot the situation where your ethernet cable is connected 
     * Uncheck the box next to "Turn on fast startup (recommended)" and click "Save changes".
     * Restart your computer.
 
+## Windows 10 PC Slow Performance. 
+
 Here are some troubleshooting steps you can try to improve the performance of a slow Windows 10 PC:
 
 **Basic Checks:**
