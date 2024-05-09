@@ -27,6 +27,49 @@ Here's how to troubleshoot the situation where your ethernet cable is connected 
     * `ipconfig /renew` (attempts to obtain a new IP address)
 * **Restart your computer** after running these commands.
 
+## Flushing the DNS Cache on Windows 10
+
+Flushing the DNS cache can sometimes resolve internet connectivity issues by clearing outdated or incorrect information about website locations. Here's how to do it on Windows 10:
+
+**1. Open Command Prompt:**
+
+* Press the **Windows key + X** simultaneously. 
+* Select **Command Prompt (Admin)**. You might need to provide administrator permission to proceed.
+
+**2. Run the Flush DNS Command:**
+
+* In the Command Prompt window, type the following command and press Enter:
+
+```
+ipconfig /flushdns
+```
+
+* You should see a message confirming that the DNS Resolver Cache was successfully flushed.
+
+**3. (Optional) Additional Steps:**
+
+* While not always necessary, you can also consider running these additional commands to potentially improve your internet connection:
+
+    * **Renew IP address:**
+
+    ```
+    ipconfig /renew
+    ```
+
+    * **Release IP address (then renew):**
+
+    ```
+    ipconfig /release
+    ipconfig /renew
+    ```
+
+* **Close Command Prompt:**
+
+* Click the "X" button in the top right corner of the Command Prompt window.
+
+**That's it!** Your DNS cache should now be flushed. You can try accessing websites again to see if the issue is resolved.
+
+
 **5. Update Network Adapter Drivers:**
 
 * **Right-click on your wired ethernet adapter** in the Network Connections window and select "Properties".
