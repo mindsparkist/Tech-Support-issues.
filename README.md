@@ -157,3 +157,24 @@ Here are some troubleshooting steps you can try to improve the performance of a 
 * Not all steps might be necessary for your specific situation. 
 * If none of these solutions work, consider seeking help from a computer technician or contacting Microsoft support.
 
+There are two ways to remove apps from Apps & features in Windows:
+
+**Using Settings:**
+
+1. Open the Start Menu.
+2. Click on "Settings".
+3. Click on "Apps".
+4. Select "Apps & features" from the left-hand side menu.
+5. Find the app you want to remove from the list that appears.
+6. Click on the app and then select "Uninstall".
+7. Follow any on-screen instructions to complete the uninstall process.
+
+**Using Control Panel (Optional):**
+
+1. Open the Start menu and type "Control Panel" in the search bar.
+2. Click on "Control Panel" from the search results.
+3. Go to "Programs" > "Programs and Features".
+4. Right-click on the program you want to uninstall and select "Uninstall".
+5. Follow any on-screen instructions to complete the uninstall process.
+
+**Note:** In some cases, even if you've uninstalled an app, its entry might still be visible in Apps & features. If this happens, you can try right-clicking on the entry and selecting "Remove" to clean up the list. 
