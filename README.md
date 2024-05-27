@@ -1,3 +1,34 @@
+Windows Remote Assistance allows someone you trust to connect to your computer remotely and fix issues. Here's how it works:
+
+**Enabling Remote Assistance:**
+
+1. **Search for Remote Assistance:** In the taskbar's search bar, type "remote assistance".
+2. **Allow Connections:** Select "Allow Remote Assistance invitations to be sent from this computer" from the search results.
+3. **Enable Remote Access:** In the opened window, under the "Remote" tab, check the box "Allow Remote Assistance connections to this computer" and click "OK".
+
+**Getting Help:**
+
+1. **Search Again:**  Repeat step 1 mentioned above.
+2. **Invite Someone:** Select "Invite someone you trust to help you, or offer to help someone else".
+3. **Choose Helper:** Click "Invite someone you trust to help you".
+4. **Share Invitation:** There are three options:
+    * **Email:** This will create an invitation file with a password that you can email to your helper.
+    * **Easy Connect:** This generates a code for your helper if they're in your contacts. 
+    * **Save as file:** This creates a file containing the invitation details.
+
+**Giving Help (if someone requested it):**
+
+1. **Search for Remote Assistance:** Repeat step 1 mentioned above.
+2. **Help Someone:** Select "Invite someone you trust to help you, or offer to help someone else" and then choose "Help someone who has invited you".
+3. **Connect Methods:** Choose a connection method based on how you received the invitation: Easy Connect, email attachment, or invitation file.
+4. **Grant Control (optional):** If you need full control, request it after connecting and wait for permission.
+
+**Important Note:** Only allow remote assistance from people you trust. Never give control to someone you don't know. 
+
+For more details and visuals, you can refer to Microsoft's support page on Remote Assistance [https://support.microsoft.com/en-us/windows/solve-pc-problems-remotely-with-remote-assistance-and-easy-connect-cf384ff4-6269-d86e-bcfe-92d72ed55922](https://support.microsoft.com/en-us/windows/solve-pc-problems-remotely-with-remote-assistance-and-easy-connect-cf384ff4-6269-d86e-bcfe-92d72ed55922).
+
+
+
 # Tech-Support-issues.
 Here's how to troubleshoot the situation where your ethernet cable is connected but giving an APIPA address (Automatic Private IP Addressing) in Windows, while wifi works:
 
