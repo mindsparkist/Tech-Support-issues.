@@ -209,3 +209,15 @@ There are two ways to remove apps from Apps & features in Windows:
 5. Follow any on-screen instructions to complete the uninstall process.
 
 **Note:** In some cases, even if you've uninstalled an app, its entry might still be visible in Apps & features. If this happens, you can try right-clicking on the entry and selecting "Remove" to clean up the list. 
+
+## Safemode
+
+Notes: Restarting your device should be sufficient to exit you from Safe Mode back into normal mode. However, if for some reason your machine is still booting into Safe Mode on its own after restarting, try this:
+
+Press the Windows logo key  + R.
+
+Type msconfig in the Open box and then select OK.
+
+Select the Boot tab.
+
+Under Boot options, clear the Safe bootcheckbox.
