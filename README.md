@@ -221,3 +221,12 @@ Type msconfig in the Open box and then select OK.
 Select the Boot tab.
 
 Under Boot options, clear the Safe bootcheckbox.
+
+The Registry Editor in Windows 10, also known as regedit.exe, is a powerful tool that lets you view and edit the central database of settings for your Windows operating system and the programs installed on it.  This database is called the Windows Registry. 
+
+Here's a breakdown of what it does:
+
+* **View and Monitor:** You can browse through the registry to see how different settings are configured.
+* **Edit Settings:**  With caution, you can make changes to these settings. This can be useful for troubleshooting specific issues or fine-tuning your system, but editing the registry incorrectly can cause problems.
+
+**Important Note:** Because of the potential to cause harm, editing the registry is recommended for advanced users only.  If you're not comfortable with it, it's best to leave it alone.  Microsoft recommends creating a backup of the registry before making any changes [!windows registry information for advanced users]. 
