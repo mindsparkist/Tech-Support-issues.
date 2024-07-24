@@ -259,3 +259,4 @@ Modems and routers use lights to indicate their status and connection. Here's ho
 * **User Manual:**  Refer to your modem and router's user manuals for specific instructions and troubleshooting steps based on their light patterns.
 * **Contact ISP:**  If the problem persists after restarting and checking the lights, contact your internet service provider for further assistance.
 
+SQLEXPRESS service, also known as the Microsoft SQL Server Express service, is a Windows service that manages the SQL Server Express database engine. SQL Server Express is a free, lightweight version of Microsoft's popular relational database management system (RDBMS).
