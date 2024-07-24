@@ -230,3 +230,21 @@ Here's a breakdown of what it does:
 * **Edit Settings:**  With caution, you can make changes to these settings. This can be useful for troubleshooting specific issues or fine-tuning your system, but editing the registry incorrectly can cause problems.
 
 **Important Note:** Because of the potential to cause harm, editing the registry is recommended for advanced users only.  If you're not comfortable with it, it's best to leave it alone.  Microsoft recommends creating a backup of the registry before making any changes [!windows registry information for advanced users]. 
+
+Modem Lights:
+
+Power: This light should be solid green or blue, indicating the modem is receiving power.
+Downstream (DS or Download): This light should be solid green or blue, indicating the modem is receiving a signal from your internet service provider (ISP).
+Upstream (US or Upload): This light might blink or show activity when data is being uploaded, but it should generally be lit green or blue.
+Internet (WAN or Globe): This light, if present, should be solid green or blue, signifying a successful internet connection established by the modem.
+Router Lights:
+
+Power: Similar to the modem, this light should be solid green or blue.
+LAN (Local Area Network): This light should be solid green or blue when a device is connected to the router through an ethernet cable. It might blink during data transfer.
+Wi-Fi: This light, if present, should be solid green or blue when the Wi-Fi network is active. It might blink during data transfer.
+Internet (WAN or Globe): This light, if present, might be separate from the modem's internet light and should also be solid green or blue for a successful internet connection through the router.
+Important Notes:
+
+Light Colors: While green and blue are common, some modems/routers might use different colors to represent specific states. Refer to your device's user manual for exact color meanings.
+Blinking Lights: Blinking lights can indicate activity or sometimes errors. Consult your user manual for specific blinking patterns associated with errors.
+Multiple Lights Off: If several lights are off, it could indicate a power issue, a problem with the device itself, or a complete lack of internet connection.
