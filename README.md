@@ -260,3 +260,44 @@ Modems and routers use lights to indicate their status and connection. Here's ho
 * **Contact ISP:**  If the problem persists after restarting and checking the lights, contact your internet service provider for further assistance.
 
 SQLEXPRESS service, also known as the Microsoft SQL Server Express service, is a Windows service that manages the SQL Server Express database engine. SQL Server Express is a free, lightweight version of Microsoft's popular relational database management system (RDBMS).
+
+## Understanding Ethernet Port LED Lights
+
+Ethernet port LED lights are small visual indicators that provide information about the status and activity of your network connection. Typically, there are two LED lights on an Ethernet port:
+
+### 1. Link/Connection LED
+* **Indicates:** Whether a network cable is properly connected and a link has been established.
+* **Behavior:**
+  * **Solid on:** A link is established, and the port is connected to a network device.
+  * **Off:** No cable is connected or there's no link established.
+
+### 2. Activity LED
+* **Indicates:** Network traffic or data transfer.
+* **Behavior:**
+  * **Blinking:** Data is being transmitted or received.
+  * **Off:** No data is being transferred.
+
+### Color Codes
+* **Green:** Often indicates a faster connection speed (e.g., 100 Mbps or 1000 Mbps).
+* **Amber or Yellow:** Usually indicates a slower connection speed (e.g., 10 Mbps).
+
+**Note:** The specific behavior and color meanings of LED lights can vary slightly depending on the device or manufacturer.
+
+### Example:
+
+[Image of Ethernet port LED lights]
+
+In the image above:
+* **Left LED (solid green):** Indicates a link is established at a 1000 Mbps speed.
+* **Right LED (blinking green):** Indicates network activity (data transfer).
+
+### Troubleshooting with LED Lights
+By observing the LED lights, you can quickly diagnose basic network issues:
+* **No link (both LEDs off):** Check the cable connection, ensure the device is powered on, and verify network settings.
+* **Link established but no activity (link LED on, activity LED off):** There might be no network traffic or a software issue.
+* **Constant blinking activity LED:** High network traffic or potential network congestion.
+
+**Remember:** While LED lights provide valuable information, they are not a definitive diagnostic tool. For more complex network issues, you might need to use network diagnostic tools or consult with a network administrator.
+
+**Do you have any specific questions about Ethernet port LED lights or are you facing a network issue?**
+
