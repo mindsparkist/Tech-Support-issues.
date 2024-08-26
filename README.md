@@ -119,6 +119,18 @@ ipconfig /flushdns
     * Click on "Change settings that are currently unavailable".
     * Uncheck the box next to "Turn on fast startup (recommended)" and click "Save changes".
     * Restart your computer.
+ **4.2.2.2 is a public DNS server operated by Level 3 Communications.** It's often used as a quick and easy way to test basic internet connectivity.
+
+Here's why you might ping 4.2.2.2:
+
+* **Simple Connectivity Test:** If you can successfully ping 4.2.2.2, it generally indicates that your computer can communicate with the internet. However, it doesn't guarantee that all online services are accessible.
+* **Alternative to DNS Resolution:** If your DNS resolver is not working correctly, you can bypass it by directly pinging the IP address of a known public DNS server like 4.2.2.2.
+* **Easy to Remember:** The address 4.2.2.2 is relatively easy to remember compared to other DNS server IP addresses.
+
+**Important Note:** While 4.2.2.2 is a popular choice for testing connectivity, it's not always guaranteed to be accessible. Some networks or firewalls might block access to this specific IP address. In such cases, you might need to try other public DNS servers like those provided by Google (8.8.8.8) or OpenDNS (208.67.222.222).
+
+**Would you like to know more about testing internet connectivity or troubleshooting network issues?**
+
 
 ## Windows 10 PC Slow Performance. 
 
