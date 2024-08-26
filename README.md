@@ -333,5 +333,25 @@ By observing the LED lights, you can quickly diagnose basic network issues:
 
 **If you continue to experience audio issues after following these steps, please provide more details about your specific setup, including the brand and model of your audio device, any error messages you're encountering, and any recent changes you've made to your system.**
 
+**A rolling log is a type of log file that is designed to automatically manage its size.** Instead of growing indefinitely, a rolling log will either:
+
+1. **Overwrite:** The oldest entries are overwritten by newer ones once the log reaches a predetermined size.
+2. **Archive:** The log is archived (copied to another location) when it reaches a certain size, and a new, empty log file is created.
+
+This mechanism helps prevent log files from consuming excessive disk space, which can be a significant issue in production environments.
+
+**Common rolling log strategies include:**
+
+* **Time-based rolling:** Logs are rotated based on time intervals (e.g., daily, weekly, monthly).
+* **Size-based rolling:** Logs are rotated when they reach a specific size.
+* **Number-based rolling:** A fixed number of log files are kept, with the oldest ones being deleted when new ones are created.
+
+**Rolling logs are often used in:**
+
+* **Web servers:** To track access logs, error logs, and other server activity.
+* **Application servers:** To log application events, errors, and performance metrics.
+* **System logs:** To record system events, security incidents, and other system-related information.
+
+By using rolling logs, organizations can efficiently manage their log data, ensuring that important information is retained while preventing excessive storage consumption.
 
 
