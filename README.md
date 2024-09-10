@@ -366,4 +366,41 @@ This mechanism helps prevent log files from consuming excessive disk space, whic
 
 By using rolling logs, organizations can efficiently manage their log data, ensuring that important information is retained while preventing excessive storage consumption.
 
+Here are some troubleshooting steps for Jabra headphones not working in Windows 11:
 
+1. Check the connection:
+   - Ensure the headphones are properly connected via Bluetooth or USB.
+   - If using Bluetooth, try reconnecting or removing and re-pairing the device.
+
+2. Update drivers:
+   - Open Device Manager
+   - Locate your Jabra headphones under "Audio inputs and outputs" or "Bluetooth"
+   - Right-click and select "Update driver"
+   - Choose "Search automatically for updated driver software"
+
+3. Check Windows audio settings:
+   - Right-click the speaker icon in the taskbar and select "Open Sound settings"
+   - Ensure the correct output device (your Jabra headphones) is selected
+
+4. Run the Windows troubleshooter:
+   - Go to Settings > System > Troubleshoot > Other troubleshooters
+   - Run the "Playing Audio" troubleshooter
+
+5. Update Windows:
+   - Go to Settings > Windows Update
+   - Check for and install any available updates
+
+6. Update Jabra software:
+   - Download and install the latest Jabra Direct or Jabra Sound+ app
+   - Use the app to check for firmware updates for your headphones
+
+7. Reset the headphones:
+   - Consult your Jabra model's user manual for specific reset instructions
+
+8. Check for interference:
+   - Move away from other electronic devices that might cause interference
+
+9. Test on another device:
+   - Try the headphones on a different computer or smartphone to isolate the issue
+
+If these steps don't resolve the problem, you may want to contact Jabra support for further assistance. Would you like me to elaborate on any of these steps?
