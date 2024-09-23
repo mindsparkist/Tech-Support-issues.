@@ -404,3 +404,47 @@ Here are some troubleshooting steps for Jabra headphones not working in Windows 
    - Try the headphones on a different computer or smartphone to isolate the issue
 
 If these steps don't resolve the problem, you may want to contact Jabra support for further assistance. Would you like me to elaborate on any of these steps?
+
+
+## Using Event Viewer to Analyze Logs: A Guide for Entry-Level Software Engineers
+
+**Event Viewer** is a powerful tool in Windows that allows you to view and analyze system logs. It can help you troubleshoot problems, monitor system health, and gather information for security analysis.
+
+**Here's a step-by-step guide on how to use Event Viewer:**
+
+### 1. Open Event Viewer:
+* **Start Menu:** Click on the Start menu and search for "Event Viewer."
+* **Run Command:** Press `Win + R`, type `eventvwr.msc`, and press Enter.
+
+### 2. Navigate the Event Viewer:
+* **Event Viewer Tree:** The left pane shows a tree structure of different log types and sources.
+* **Common Logs:** Some common logs include:
+    * **Application:** Logs events related to applications.
+    * **System:** Logs events related to the operating system and hardware.
+    * **Security:** Logs security-related events, such as login attempts and access denied.
+
+### 3. Filter Events:
+* **Filter Pane:** Use the "Filter" pane to narrow down the events displayed based on specific criteria like event type, source, date, and keywords.
+
+### 4. View Event Details:
+* **Double-Click:** Double-click on an event to view its details, including the event ID, source, type, date, time, user, computer, and description.
+
+### 5. Analyze Events:
+* **Event ID:** Each event has a unique ID that can be used to look up more information in the online documentation or help forums.
+* **Description:** The description field provides a brief explanation of the event.
+* **Source:** The source indicates the application or service that generated the event.
+* **Type:** The type can be "Error," "Warning," "Information," or "Critical."
+* **User:** The user who triggered the event (if applicable).
+* **Computer:** The computer where the event occurred.
+
+**Example:**
+
+If you're troubleshooting a network connectivity issue, you might look in the "System" log for events related to the network adapter or DNS. By filtering events based on keywords like "network" or "error," you can narrow down the potential causes.
+
+**Additional Tips:**
+
+* **Create Custom Views:** You can create custom views to filter events based on specific criteria and save them for easy access.
+* **Enable Event Logging:** Ensure that the necessary logging levels are enabled for the applications or services you want to monitor.
+* **Use Event Viewer Tools:** Event Viewer provides built-in tools like "Clear All Events" and "Save Selected Events" for managing logs.
+
+By effectively using Event Viewer, you can gain valuable insights into your system's health, troubleshoot issues, and monitor security events.
