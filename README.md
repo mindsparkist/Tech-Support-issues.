@@ -340,3 +340,27 @@ There are several methods to check if a specific port, like 52311, is open or bl
 
 By using these methods, you can determine the accessibility of port 52311 on a target system and take necessary steps to troubleshoot any connectivity issues.
 
+**Yes, you can check if a specific port is open using `netstat`.**
+
+To check if port 52311 is open, you can use the following command in your command prompt or terminal:
+
+```
+netstat -an | findstr 52311
+```
+
+**Breakdown of the command:**
+
+* **`netstat -an`:** This command lists all active TCP and UDP connections.
+* **`findstr 52311`:** This filters the output to show only lines containing "52311."
+
+If port 52311 is open and listening, you'll see a line in the output with the port number and its status (usually "LISTENING").
+
+**Note:** To check for open ports on a remote system, you'll need to use network scanning tools like Nmap or online port scanners. 
+
+**Remember:** 
+* **Firewall Rules:** Firewalls can block incoming and outgoing traffic on specific ports.
+* **Remote Access:** If you're trying to access a remote system, check if the firewall on the target system is configured to allow incoming connections on port 52311.
+* **Network Configuration:** Misconfigurations in network devices (routers, switches) can also prevent port access.
+
+By using these tools and considerations, you can effectively determine the status of a specific port and troubleshoot any related connectivity issues.
+
