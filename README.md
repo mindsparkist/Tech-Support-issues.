@@ -400,3 +400,26 @@ By using these tools and considerations, you can effectively determine the statu
 
 The best choice for a specific use case depends on factors like performance requirements, budget, and the complexity of the storage environment.
 
+**iSCSI (Internet Small Computer System Interface)** is a storage networking standard that allows data storage facilities to be linked over an IP network. It essentially enables the creation of a Storage Area Network (SAN) over an existing Ethernet network.
+
+**How iSCSI Works:**
+
+1. **Initiator:** A device (like a server) that initiates the data transfer.
+2. **Target:** A storage device (like a disk array) that provides the data.
+
+The initiator sends SCSI commands over the IP network to the target, which then processes the commands and sends the requested data back to the initiator. This allows servers to access storage devices located anywhere on the network, as if they were directly connected.
+
+**Key Benefits of iSCSI:**
+
+* **Flexibility:** It can be implemented over existing Ethernet networks, reducing the need for specialized hardware.
+* **Scalability:** It allows for easy scaling of storage capacity by adding more storage devices to the network.
+* **Cost-Effective:** It can be more cost-effective than traditional SAN solutions, especially for smaller deployments.
+* **Remote Access:** It enables remote access to storage devices, making it suitable for disaster recovery and remote office scenarios.
+
+**However, iSCSI also has some limitations:**
+
+* **Performance:** While iSCSI can provide good performance, it may not match the performance of dedicated Fibre Channel SANs, especially for high-performance applications.
+* **Network Congestion:** Heavy network traffic can impact iSCSI performance, especially in shared network environments.
+
+**In conclusion,** iSCSI is a versatile and cost-effective solution for many storage needs. It offers a flexible and scalable way to connect storage devices to servers over an IP network.
+
