@@ -347,4 +347,116 @@ If a newly installed driver causes issues (e.g., system instability or device ma
 
 Understanding drivers and managing them effectively ensures your hardware runs smoothly and your system remains stable. Always keep drivers up to date while maintaining the ability to revert changes in case of issues.
 
+### **Troubleshooting Tools in Windows**
+
+Windows provides a suite of built-in tools to help diagnose and resolve system issues. **Resource Monitor**, **Task Manager**, **Event Viewer**, and **Reliability Monitor** are among the most commonly used tools. Below is an overview of each tool, how it works, and its role in troubleshooting.
+
+---
+
+### **1. Resource Monitor**
+
+#### **What It Is:**
+Resource Monitor provides detailed information about how the system’s resources—CPU, memory, disk, and network—are being used. It offers granular data that helps in pinpointing performance bottlenecks.
+
+#### **How to Access:**
+- Press `Win + R`, type `resmon`, and press Enter.  
+- Alternatively, open **Task Manager** (`Ctrl + Shift + Esc`), go to the **Performance** tab, and click **Open Resource Monitor**.
+
+#### **Key Features:**
+- **CPU Tab:** Displays processes, services, and threads consuming CPU resources.
+- **Memory Tab:** Shows current memory usage by processes, including cached and standby memory.
+- **Disk Tab:** Monitors disk activity, including read/write speeds and processes accessing the disk.
+- **Network Tab:** Tracks network usage and identifies processes using the most bandwidth.
+
+#### **Troubleshooting Applications:**
+- Identify processes causing high CPU, memory, or disk usage.
+- Diagnose network-related issues by viewing active connections and bandwidth usage.
+- Determine if hardware resources are overwhelmed or underutilized.
+
+---
+
+### **2. Task Manager**
+
+#### **What It Is:**
+Task Manager is a real-time monitoring tool that provides an overview of system performance, running processes, and services. It’s often the first tool used for basic troubleshooting.
+
+#### **How to Access:**
+- Press `Ctrl + Shift + Esc`.  
+- Right-click the taskbar and select **Task Manager**.
+
+#### **Key Features:**
+- **Processes Tab:** Lists all running applications and background processes with their resource usage.
+- **Performance Tab:** Shows CPU, memory, disk, and network usage in real time.
+- **App History Tab:** Provides historical data about CPU and network usage by Windows Store apps.
+- **Startup Tab:** Lists programs set to run at startup and their impact on boot time.
+- **Details and Services Tabs:** Provide advanced process and service management options.
+
+#### **Troubleshooting Applications:**
+- End unresponsive or high-resource-usage processes.
+- Analyze startup programs to reduce boot time.
+- Monitor system performance metrics like CPU or memory usage.
+- Identify apps consuming excessive resources.
+
+---
+
+### **3. Event Viewer**
+
+#### **What It Is:**
+Event Viewer logs detailed information about system events, errors, warnings, and significant actions performed by the operating system and applications. It is invaluable for diagnosing system crashes and software or hardware issues.
+
+#### **How to Access:**
+- Press `Win + R`, type `eventvwr`, and press Enter.  
+- Alternatively, search for **Event Viewer** in the Start menu.
+
+#### **Key Features:**
+- **Windows Logs:** Includes Application, Security, Setup, System, and Forwarded Events logs.
+- **Application and Services Logs:** Contains detailed information for specific applications and services.
+- **Custom Views:** Allows you to create filtered views for specific event types or sources.
+
+#### **Troubleshooting Applications:**
+- **System Crashes or BSODs:** Look for critical errors under the **System** log.
+- **Application Failures:** Check the **Application** log for errors related to program crashes.
+- **Security Events:** Audit login attempts and access control in the **Security** log.
+- **Detailed Debugging:** Use Event IDs to research specific errors or warnings.
+
+---
+
+### **4. Reliability Monitor**
+
+#### **What It Is:**
+Reliability Monitor provides a timeline of system stability, highlighting hardware failures, application crashes, and system updates. It assigns a **Stability Index** score, allowing you to track changes over time.
+
+#### **How to Access:**
+- Press `Win + R`, type `perfmon /rel`, and press Enter.  
+- Alternatively, search for **Reliability Monitor** in the Start menu.
+
+#### **Key Features:**
+- **Timeline View:** Displays system events (e.g., updates, crashes) on a day-by-day basis.
+- **Error Details:** Lists critical events, warnings, and informational updates.
+- **Actionable Links:** Provides links to troubleshoot specific issues.
+
+#### **Troubleshooting Applications:**
+- Identify patterns of instability caused by updates or software installations.
+- Investigate frequent application crashes and their root causes.
+- Monitor the impact of hardware changes or driver installations.
+- Use historical data to correlate specific events with system issues.
+
+---
+
+### **Comparison of Tools**
+
+| **Tool**                | **Primary Use**                                 | **Depth of Information**   | **Best For**                                      |
+|--------------------------|------------------------------------------------|----------------------------|--------------------------------------------------|
+| **Resource Monitor**     | Detailed resource monitoring                   | High                       | Performance bottlenecks, real-time resource use |
+| **Task Manager**         | Basic system monitoring and process management | Moderate                   | Quick fixes, unresponsive programs              |
+| **Event Viewer**         | Event logging and detailed diagnostics         | High                       | Diagnosing errors, crashes, and security events |
+| **Reliability Monitor**  | System stability over time                     | Moderate                   | Identifying long-term trends and root causes    |
+
+---
+
+### **Conclusion**
+
+These tools work together to provide a comprehensive troubleshooting framework in Windows. **Task Manager** and **Resource Monitor** focus on real-time performance, while **Event Viewer** and **Reliability Monitor** offer historical data and logs for deeper insights. Mastering these tools can significantly enhance your ability to diagnose and resolve system issues efficiently.
+
+
 
