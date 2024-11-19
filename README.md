@@ -497,5 +497,44 @@ Characteristics:
 
 Recommended for advanced troubleshooting when normal startup fails.
 
+System Restore in Windows 10:
 
+Definition:
+- Feature that creates restore points before significant system changes
+- Allows reverting system to previous state
+- Helps recover from software/driver issues
+
+How to Use:
+
+1. Create Restore Point
+- Open System Properties
+- Go to "System Protection" tab
+- Click "Create" button
+- Name the restore point
+- Windows automatically creates points periodically
+
+2. Perform System Restore
+- Open System Restore
+- Search "Recovery" in Start menu
+- Select "Open System Restore"
+- Choose a restore point
+- Click "Next" and "Finish"
+
+3. Automatic Restore Points
+- Windows Update installations
+- Software/driver installations
+- System configuration changes
+
+Limitations:
+- Does not restore personal files
+- Cannot undo Windows version upgrades
+- Limited number of restore points saved
+- Cannot restore if System Restore is disabled
+
+Recommended Usage:
+- Create restore point before major changes
+- Use when experiencing system instability
+- Helps avoid complete system reinstallation
+
+---------------------------------------------------------------------
 
