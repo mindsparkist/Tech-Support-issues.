@@ -612,4 +612,122 @@ Typical Use Cases:
 - Facilitating single sign-on experiences
 
 
+Windows Network Types:
+
+1. Private Network
+- Trusted local network (home/small office)
+- Allows file/printer sharing
+- Lower security restrictions
+- Devices can see and communicate freely
+
+2. Public Network
+- Untrusted networks (coffee shops, airports)
+- Maximum security settings
+- File/printer sharing disabled
+- Restricts network discovery
+- Prevents unauthorized access
+
+3. Domain Network
+- Enterprise/corporate environment
+- Centrally managed by Active Directory
+- Controlled by network administrators
+- Uniform security policies
+- Centralized user authentication
+- Advanced access management
+
+Key Differences:
+- Security level
+- Sharing permissions
+- Administrative control
+- Network discovery settings
+
+Network Type Selection Impacts:
+- Firewall configuration
+- Sharing capabilities
+- Security restrictions
+- User access controls
+
+Location Method:
+- Windows automatically detects network type
+- Manual selection possible
+- Can be changed in Network and Sharing Center
+
+LLTD (Link Layer Topology Discovery) Mapper Overview:
+
+Purpose:
+- Network device discovery protocol
+- Maps network topology
+- Identifies network devices and their relationships
+
+Key Characteristics:
+- Microsoft proprietary protocol
+- Layer 2 (Data Link Layer) network discovery
+- Provides network visualization
+- Helps identify network device connections
+
+Functionality:
+- Discovers network devices
+- Creates network topology map
+- Supports Windows network visualization
+- Identifies device types and connections
+
+Uses:
+- Network troubleshooting
+- Network configuration management
+- Visualizing network infrastructure
+- Identifying network device relationships
+
+Limitations:
+- Windows-specific protocol
+- Requires LLTD support on devices
+- Limited cross-platform compatibility
+
+Technical Details:
+- Uses UPnP (Universal Plug and Play)
+- Operates on local network segments
+- Provides graphical network topology representation
+
+Availability:
+- Built into Windows operating systems
+- Can be enabled/disabled in network settings
+
+Custom DNS Overview:
+
+Definition:
+- User-defined Domain Name System (DNS) servers
+- Alternative to default ISP-provided DNS servers
+
+Purposes:
+- Improved internet speed
+- Enhanced security
+- Content filtering
+- Bypassing geographical restrictions
+
+Popular Custom DNS Providers:
+1. Google DNS (8.8.8.8)
+2. Cloudflare DNS (1.1.1.1)
+3. OpenDNS
+4. Quad9 DNS
+
+Configuration Methods:
+- Network adapter settings
+- Router configuration
+- Operating system network settings
+
+Benefits:
+- Faster website loading
+- Blocking malicious websites
+- Reduced tracking
+- Additional privacy features
+
+Configuration Considerations:
+- Choose reputable DNS providers
+- Test performance
+- Understand potential privacy implications
+
+Setup Locations:
+- Windows network settings
+- Router administration panel
+- Individual device network configurations
+
 
