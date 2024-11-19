@@ -458,5 +458,44 @@ Reliability Monitor provides a timeline of system stability, highlighting hardwa
 
 These tools work together to provide a comprehensive troubleshooting framework in Windows. **Task Manager** and **Resource Monitor** focus on real-time performance, while **Event Viewer** and **Reliability Monitor** offer historical data and logs for deeper insights. Mastering these tools can significantly enhance your ability to diagnose and resolve system issues efficiently.
 
+Safe Mode is a diagnostic startup mode for computer systems, particularly Windows, that loads the operating system with minimal drivers and services:
+
+Ways to Load Safe Mode:
+
+1. Windows Startup Options
+- Press F8 repeatedly during boot (older Windows versions)
+- Use Shift + Restart for newer Windows versions
+- Select "Safe Mode" from advanced startup options
+
+2. Configuration Settings
+- Open System Configuration utility
+- Go to Boot tab
+- Check "Safe Mode" option
+- Restart computer
+
+3. Command Prompt Method
+- Open Command Prompt with administrator privileges
+- Use command: bcdedit /set {current} safeboot minimal
+
+Safe Mode Types:
+- Minimal Safe Mode: Limited drivers and services
+- Networking Safe Mode: Includes network connectivity
+- Command Prompt Safe Mode: Loads only command prompt
+
+Purpose of Safe Mode:
+- Troubleshoot system issues
+- Remove malware
+- Uninstall problematic drivers
+- Diagnose startup problems
+- Perform system maintenance
+
+Characteristics:
+- Low-resolution display
+- Limited functionality
+- Minimal system resources
+- Helps identify software conflicts
+
+Recommended for advanced troubleshooting when normal startup fails.
+
 
 
