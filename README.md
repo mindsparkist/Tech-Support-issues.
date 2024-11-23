@@ -730,4 +730,453 @@ Setup Locations:
 - Router administration panel
 - Individual device network configurations
 
+### **User Account Control (UAC) Settings in Local and Group Policy**
+
+User Account Control (UAC) is a security feature in Windows designed to prevent unauthorized changes to the operating system by requiring elevated permissions for certain tasks. UAC can be configured on individual machines or centrally managed in domain environments using Group Policy.
+
+---
+
+### **UAC Settings in Local Settings**
+
+#### **Accessing Local UAC Settings:**
+1. Open the **Control Panel**.
+2. Navigate to **System and Security > Security and Maintenance > Change User Account Control settings**.
+3. Adjust the slider to your desired security level.
+
+#### **UAC Notification Levels (Local Settings):**
+The UAC settings slider provides four levels of control:
+1. **Always Notify** (Most Secure):
+   - Prompts when programs try to install software or make changes to the computer.
+   - Prompts when users make changes to Windows settings.
+2. **Notify Me Only When Apps Try to Make Changes (Default):**
+   - Prompts when programs attempt to make changes but not for user-initiated Windows settings changes.
+   - The desktop dims (secure desktop) during prompts.
+3. **Notify Me Only When Apps Try to Make Changes (No Dimming):**
+   - Same as the default but does not dim the desktop during prompts.
+4. **Never Notify** (Least Secure):
+   - No prompts for changes, significantly reducing security.
+
+#### **How to Change UAC in Local Security Policy:**
+1. Press `Win + R`, type `secpol.msc`, and press Enter.
+2. Navigate to **Local Policies > Security Options**.
+3. Configure UAC-related policies:
+   - **User Account Control: Run all administrators in Admin Approval Mode**
+   - **User Account Control: Behavior of the elevation prompt for administrators in Admin Approval Mode**
+   - **User Account Control: Only elevate UIAccess applications that are installed in secure locations**
+
+---
+
+### **UAC Settings in Group Policy**
+
+Group Policy allows administrators in domain environments to enforce UAC settings across multiple computers.
+
+#### **Accessing Group Policy Editor:**
+1. Press `Win + R`, type `gpedit.msc`, and press Enter (for local Group Policy Editor).
+2. For domain-wide configurations, use **Group Policy Management Console (GPMC)** on a domain controller.
+
+#### **UAC Policies in Group Policy:**
+UAC-related policies are located in:
+**Computer Configuration > Windows Settings > Security Settings > Local Policies > Security Options**
+
+Key Group Policy settings include:
+
+1. **User Account Control: Run All Administrators in Admin Approval Mode**
+   - **Enabled (Default):** Administrators must approve actions that require elevated permissions.
+   - **Disabled:** UAC is turned off.
+
+2. **User Account Control: Behavior of the Elevation Prompt for Administrators**
+   - **Options:**
+     - Prompt for consent on the secure desktop (default).
+     - Prompt for credentials on the secure desktop.
+     - Elevate without prompting (least secure).
+
+3. **User Account Control: Behavior of the Elevation Prompt for Standard Users**
+   - **Options:**
+     - Automatically deny elevation requests (default).
+     - Prompt for credentials.
+
+4. **User Account Control: Only Elevate Executables That Are Signed and Validated**
+   - Requires executables to have valid signatures before elevation.
+
+5. **User Account Control: Virtualize File and Registry Write Failures to Per User Locations**
+   - Redirects legacy applications attempting to write to protected locations.
+
+6. **User Account Control: Detect Application Installations and Prompt for Elevation**
+   - Enables or disables prompts for application installations requiring elevated permissions.
+
+7. **User Account Control: Allow UIAccess Applications to Prompt for Elevation Without Using Secure Desktop**
+   - Permits certain accessibility applications to bypass secure desktop.
+
+#### **Enforcing UAC via Group Policy:**
+1. Open **Group Policy Management Console (GPMC)**.
+2. Create or edit a Group Policy Object (GPO).
+3. Navigate to the UAC settings listed above.
+4. Configure policies as per your organization’s security requirements.
+5. Apply the GPO to the appropriate Organizational Unit (OU) or domain.
+
+---
+
+### **Best Practices for Configuring UAC:**
+
+1. **Always Enable UAC:** Disabling UAC leaves systems vulnerable to malware and unauthorized changes.
+2. **Use Secure Desktop for Elevation Prompts:** Secure desktop prevents other applications from interfering with elevation prompts.
+3. **Prompt for Credentials for Standard Users:** This ensures non-administrative users cannot inadvertently authorize changes.
+4. **Apply Least Privilege:** Limit administrative rights to only those who need them, reducing unnecessary elevation prompts.
+5. **Monitor UAC-Related Events:** Use **Event Viewer** to track UAC-related events for auditing and troubleshooting.
+
+---
+
+### **Conclusion**
+
+UAC is a vital security feature that helps prevent unauthorized changes to Windows systems. While local UAC settings are suitable for standalone machines, Group Policy provides centralized control over UAC in domain environments. Properly configuring UAC can significantly enhance security without overly inconveniencing users.
+
+### **Network Discovery, Network Profiles, and Checking Network Speed in Windows 10**
+
+---
+
+### **1. Network Discovery**
+
+#### **What is Network Discovery?**
+Network Discovery is a Windows feature that determines whether your computer can see and communicate with other devices on the same network and whether other devices can discover your computer. It’s a key setting for sharing files, printers, and other resources.
+
+#### **How to Enable or Disable Network Discovery:**
+1. Open **Settings** (`Win + I`).
+2. Navigate to **Network & Internet > Status**.
+3. Click **Change connection properties**.
+4. Choose your preferred **Network Profile** (Private or Public; see below).
+5. For advanced settings:
+   - Open **Control Panel** (`Win + R`, type `control`, press Enter).
+   - Go to **Network and Sharing Center > Change advanced sharing settings**.
+   - Under your network profile, toggle **Turn on Network Discovery** or **Turn off Network Discovery**.
+
+#### **When to Enable Network Discovery:**
+- Enable for trusted networks (Private or Domain) to share resources like files or printers.
+- Disable for untrusted networks (Public) to enhance security.
+
+---
+
+### **2. Network Profiles: Public, Private, and Domain**
+
+#### **What Are Network Profiles?**
+Network profiles determine how your computer interacts with the network. They define settings for sharing, firewall rules, and network discovery.
+
+---
+
+#### **Types of Network Profiles:**
+
+1. **Public Network**:
+   - **Purpose:** Used for untrusted networks like airports, cafes, or public Wi-Fi.
+   - **Settings:**
+     - Network Discovery is **off**.
+     - Your device is **hidden** and cannot be discovered by other devices.
+     - File and printer sharing is **disabled**.
+     - Stricter firewall rules are applied.
+   - **When to Use:** Always select this for untrusted networks.
+
+2. **Private Network**:
+   - **Purpose:** Used for trusted networks like home or small office networks.
+   - **Settings:**
+     - Network Discovery is **on**.
+     - Your device is **discoverable** to other devices on the network.
+     - File and printer sharing can be enabled.
+   - **When to Use:** Choose this profile for networks you trust and want to share resources on.
+
+3. **Domain Network**:
+   - **Purpose:** Used in enterprise or corporate environments where a computer is joined to a domain.
+   - **Settings:**
+     - Managed by **Group Policy** or a domain administrator.
+     - Network Discovery and other settings depend on organizational policies.
+   - **When to Use:** Automatically assigned when connected to a corporate network.
+
+---
+
+#### **How to Change Network Profiles:**
+1. Open **Settings** (`Win + I`).
+2. Navigate to **Network & Internet > Status**.
+3. Under your active network connection, click **Properties**.
+4. Choose either **Public** or **Private**.
+
+---
+
+### **3. Checking Network Speed in Windows 10**
+
+#### **Method 1: Using Task Manager**
+1. Press `Ctrl + Shift + Esc` to open **Task Manager**.
+2. Go to the **Performance** tab.
+3. Select **Ethernet** (or **Wi-Fi**) from the left sidebar.
+4. Look for the **Speed** field, which shows the current link speed (e.g., 100 Mbps, 1 Gbps).
+
+#### **Method 2: Using the Network & Internet Settings**
+1. Open **Settings** (`Win + I`).
+2. Go to **Network & Internet > Status**.
+3. Click **Properties** under your active network connection.
+4. Look for the **Link speed (Receive/Transmit)** to view the network adapter’s speed.
+
+#### **Method 3: Using Command Prompt**
+1. Press `Win + R`, type `cmd`, and press Enter.
+2. Run the following command:
+   ```cmd
+   netsh wlan show interfaces
+   ```
+   - For Wi-Fi, the **Receive rate** and **Transmit rate** will display your current connection speed.
+
+#### **Method 4: Using Online Speed Tests**
+1. Open a browser and visit a speed test site, such as [Speedtest.net](https://www.speedtest.net).
+2. Run the test to measure your actual download and upload speeds.
+
+---
+
+### **Summary Table**
+
+| **Feature**            | **Public**                    | **Private**                  | **Domain**                |
+|-------------------------|-------------------------------|------------------------------|---------------------------|
+| **Network Discovery**   | Off                          | On                           | Controlled by Group Policy|
+| **File Sharing**        | Disabled                     | Enabled                      | Enabled/Managed           |
+| **Firewall**            | Strict rules                 | Moderate rules               | Managed by IT policies    |
+| **Use Case**            | Public Wi-Fi, untrusted networks | Home or small office networks | Enterprise environments   |
+
+By properly managing **Network Discovery** and **Profiles**, and using tools to check network speed, you can optimize your Windows 10 experience for security and performance.
+
+### **Disk Management in Windows: Overview and Advanced Usage**
+
+Disk Management is a powerful built-in Windows tool that allows users to manage disks, partitions, and volumes. It is used to create, delete, format, and resize partitions, as well as configure advanced storage features like RAID and virtual hard disks.
+
+---
+
+### **1. Creating Different Types of Volumes**
+
+#### **Simple Volume**
+- **Definition:** A basic volume created from a single disk.
+- **Use Case:** Ideal for simple storage needs on a single disk.
+- **Steps to Create:**
+  1. Open **Disk Management** (`Win + R`, type `diskmgmt.msc`, and press Enter).
+  2. Right-click on unallocated space on a disk.
+  3. Select **New Simple Volume** and follow the wizard to assign a drive letter, format, and set the volume size.
+
+---
+
+#### **Spanned Volume**
+- **Definition:** Combines unallocated space from multiple disks into a single volume.
+- **Use Case:** Useful for extending storage, but not fault-tolerant.
+- **Steps to Create:**
+  1. Right-click unallocated space on the first disk and select **New Spanned Volume**.
+  2. Add additional disks to the volume through the wizard.
+  3. Assign a drive letter and format.
+
+---
+
+#### **Striped Volume (RAID 0)**
+- **Definition:** Distributes data evenly across two or more disks for improved performance. No redundancy.
+- **Use Case:** Performance-heavy tasks like video editing, but data loss occurs if one disk fails.
+- **Steps to Create:**
+  1. Right-click unallocated space on one of the disks and select **New Striped Volume**.
+  2. Add other disks to the volume and configure.
+
+---
+
+#### **Mirrored Volume (RAID 1)**
+- **Definition:** Duplicates data across two disks for redundancy.
+- **Use Case:** Fault-tolerant storage; data remains safe even if one disk fails.
+- **Steps to Create:**
+  1. Right-click unallocated space on one disk and select **New Mirrored Volume**.
+  2. Add a second disk for mirroring and follow the wizard.
+
+---
+
+#### **RAID-5 Volume**
+- **Definition:** Stripes data across three or more disks with parity, providing redundancy and better performance.
+- **Use Case:** Fault-tolerant and efficient use of disk space.
+- **Steps to Create:**
+  1. Right-click unallocated space on one of the disks and select **New RAID-5 Volume**.
+  2. Add at least two additional disks and complete the setup.
+
+---
+
+### **2. Adding and Managing Virtual Hard Disks (VHD/VHDX)**
+
+#### **What Are VHD and VHDX?**
+- **VHD (Virtual Hard Disk):** Older format, compatible with older systems.
+- **VHDX (Virtual Hard Disk Extended):** Newer format with larger capacity (up to 64 TB) and better performance.
+
+#### **Steps to Add a Virtual Hard Disk:**
+1. Open **Disk Management**.
+2. Click **Action > Create VHD**.
+3. Select the location, name, and size of the VHD/VHDX file.
+4. Choose between **Fixed Size** or **Dynamically Expanding**.
+
+#### **Attach a VHD/VHDX:**
+1. Click **Action > Attach VHD**.
+2. Browse to the VHD/VHDX file and select it.
+
+#### **Initialize and Format VHD/VHDX:**
+1. After attaching, right-click on the disk in Disk Management.
+2. Select **Initialize Disk** and choose **MBR** or **GPT**.
+3. Create a new volume by right-clicking the unallocated space.
+
+---
+
+### **3. Partitioning Schemes: MBR and GPT**
+
+#### **MBR (Master Boot Record)**
+- **Features:**
+  - Supports up to 4 primary partitions or 3 primary + 1 extended partition.
+  - Maximum disk size: 2 TB.
+  - Older standard, compatible with legacy BIOS systems.
+- **Use Case:** Suitable for smaller drives or older systems.
+
+#### **GPT (GUID Partition Table)**
+- **Features:**
+  - Supports up to 128 partitions (no need for extended partitions).
+  - Maximum disk size: 9.4 ZB (theoretical).
+  - Required for UEFI systems and disks larger than 2 TB.
+- **Use Case:** Recommended for modern systems and large drives.
+
+#### **How to Choose:**
+- Use GPT for newer systems and larger drives.
+- Use MBR for backward compatibility with older systems.
+
+---
+
+### **4. File Systems: FAT32, exFAT, and NTFS**
+
+#### **FAT32**
+- **Features:**
+  - Compatible with almost all operating systems, including Linux.
+  - Maximum file size: 4 GB.
+  - Maximum partition size: 32 GB in Windows (larger sizes possible with third-party tools).
+- **Use Case:** USB drives and devices requiring broad compatibility.
+
+#### **exFAT**
+- **Features:**
+  - Improved FAT32 successor, supporting files larger than 4 GB.
+  - Compatible with Windows, macOS, and Linux (with additional drivers).
+- **Use Case:** External drives used across multiple operating systems.
+
+#### **NTFS**
+- **Features:**
+  - Advanced file system with encryption, compression, and larger file size limits.
+  - Native to Windows; read-only on macOS (without third-party tools).
+- **Use Case:** Internal drives for Windows systems.
+
+---
+
+### **5. Linux Compatibility with File Systems**
+- **FAT32:** Fully supported in most Linux distributions.
+- **exFAT:** Supported in newer kernels; may require installation of additional packages in older distributions.
+- **NTFS:** Fully supported with the `ntfs-3g` driver.
+- **MBR and GPT:** Both partition schemes are fully supported by Linux.
+
+---
+
+### **6. Checking and Managing Disk Speed**
+- Use tools like **Disk Management**, **Task Manager**, or third-party applications to monitor disk performance.
+- For advanced monitoring, consider tools like **CrystalDiskInfo** or **HD Tune**.
+
+---
+
+### **Conclusion**
+Windows Disk Management provides robust options for creating and managing different types of volumes, adding virtual disks, and configuring partition schemes and file systems. Understanding these features ensures effective use of storage resources for diverse needs and compatibility across operating systems.
+
+### **Application Compatibility Toolkit and Windows ADK**
+
+---
+
+#### **1. Application Compatibility Toolkit (ACT)**
+
+The **Application Compatibility Toolkit (ACT)** is a component of the Microsoft Deployment Toolkit that helps IT professionals and organizations evaluate and mitigate compatibility issues before deploying new versions of Windows or applications. 
+
+- **Key Features:**
+  1. **Inventory Collection:** Gathers information about installed software, devices, and system components.
+  2. **Compatibility Analysis:** Identifies potential compatibility issues with applications and drivers.
+  3. **Compatibility Fixes (Shims):** Helps apply fixes to applications that may not function correctly on newer operating systems.
+  4. **Reporting Tools:** Provides detailed reports on compatibility risks.
+
+- **Use Cases:**
+  - Assess application compatibility before migrating to a newer version of Windows.
+  - Apply fixes to legacy applications without modifying their code.
+
+---
+
+#### **2. Windows Assessment and Deployment Kit (ADK)**
+
+The **Windows ADK** is a suite of tools designed to help deploy, customize, and test Windows operating systems at scale. It is the successor to the ACT and is more comprehensive, integrating tools for both application and hardware compatibility.
+
+- **Key Tools in Windows ADK:**
+  1. **Windows Performance Toolkit (WPT):** Measures system performance.
+  2. **Deployment Image Servicing and Management (DISM):** Configures and services Windows images.
+  3. **User State Migration Tool (USMT):** Migrates user data during system upgrades.
+  4. **Windows Preinstallation Environment (WinPE):** Creates bootable environments for recovery and installation.
+  5. **Compatibility Administrator:** Manages application shims for compatibility issues.
+
+- **Use Cases:**
+  - Create custom Windows images.
+  - Automate and streamline OS deployment.
+  - Test application and driver compatibility with newer Windows versions.
+
+---
+
+### **Other Application Compatibility Strategies**
+
+---
+
+#### **1. Virtualization Technologies**
+- Virtualization allows legacy applications to run in isolated environments, overcoming compatibility issues.
+
+##### **Hyper-V**
+- **Description:** A Windows-based hypervisor that creates virtual machines (VMs) to run different operating systems or applications in isolated environments.
+- **Use Case:** Run older Windows versions or other operating systems to host incompatible applications.
+
+##### **App-V (Application Virtualization)**
+- **Description:** Delivers applications in a virtualized container, running them without installing on the local system.
+- **Use Case:** Allows legacy applications to run on modern operating systems without conflicts or modifications.
+
+##### **RemoteApp**
+- **Description:** A feature of Remote Desktop Services that delivers individual applications (not full desktops) to end-users via remote sessions.
+- **Use Case:** Host applications on a centralized server and deliver them to users without compatibility concerns.
+
+##### **User Experience Virtualization (UE-V)**
+- **Description:** Captures and centrally stores user settings and preferences for applications and Windows.
+- **Use Case:** Ensures consistent user experience across multiple devices, regardless of where the application runs.
+
+---
+
+#### **2. Compatibility Mode**
+- Built into Windows, compatibility mode enables legacy applications to run using settings from older versions of Windows.
+- **How to Use:**
+  1. Right-click the application executable.
+  2. Select **Properties > Compatibility** tab.
+  3. Choose a previous version of Windows and apply settings.
+
+---
+
+#### **3. Application Shims**
+- **Description:** A compatibility fix or patch applied to specific applications to modify their behavior without altering their code.
+- **Tool Used:** Compatibility Administrator in Windows ADK.
+- **Use Case:** Resolving specific application issues during OS upgrades.
+
+---
+
+#### **4. Testing in Sandboxed Environments**
+- **Description:** Use isolated environments for testing compatibility and functionality before deploying applications in production.
+- **Tools:** Hyper-V or third-party sandbox tools.
+
+---
+
+#### **5. Code Refactoring**
+- **Description:** Modify the application’s code to ensure compatibility with newer OS features or APIs.
+- **Use Case:** Required for critical legacy applications when other methods are ineffective.
+
+---
+
+#### **6. Layered Approaches**
+- Combine tools and strategies, such as using App-V for delivery and UE-V for consistency, to handle compatibility comprehensively.
+
+---
+
+### **Conclusion**
+
+Both the **Application Compatibility Toolkit** and **Windows ADK** are essential tools for identifying and resolving compatibility issues in Windows environments. In combination with virtualization technologies like Hyper-V, App-V, RemoteApp, and UE-V, organizations can manage compatibility challenges effectively, ensuring seamless transitions to newer Windows versions while maintaining productivity.
+
+Link for a video - https://youtu.be/Jh0CEaZmKzk
+
 
