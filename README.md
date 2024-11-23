@@ -1177,6 +1177,204 @@ The **Windows ADK** is a suite of tools designed to help deploy, customize, and 
 
 Both the **Application Compatibility Toolkit** and **Windows ADK** are essential tools for identifying and resolving compatibility issues in Windows environments. In combination with virtualization technologies like Hyper-V, App-V, RemoteApp, and UE-V, organizations can manage compatibility challenges effectively, ensuring seamless transitions to newer Windows versions while maintaining productivity.
 
-Link for a video - https://youtu.be/Jh0CEaZmKzk
+Link for a video - https://cumailin-my.sharepoint.com/:v:/g/personal/d23mca110423_cuchd_in/EebIqzxK1chNvEbTCiGzyVQBdXuQDhejoYP7UeRBZXCvGw?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=xgZUTy
+
+Here are the steps to troubleshoot Windows services and guide an IT technician:
+
+1. Open Services
+   - Press Windows + R
+   - Type "services.msc" and press Enter
+
+2. Check Service Status
+   - Look for service status (Running, Stopped, or Disabled)
+   - Note the "Startup Type" (Automatic, Manual, or Disabled)
+   - Right-click the service for Properties to see dependencies
+
+3. Basic Troubleshooting Steps:
+   - Try restarting the problematic service
+   - Check service dependencies are running
+   - Review Event Viewer for related errors:
+     - Press Windows + R
+     - Type "eventvwr.msc"
+     - Check System and Application logs
+
+4. Common Commands (via Command Prompt as Admin):
+   ```cmd
+   sc query servicename        # Check service status
+   sc start servicename       # Start a service
+   sc stop servicename        # Stop a service
+   sc config servicename start= auto    # Set to automatic startup
+   net start servicename      # Alternative start command
+   net stop servicename       # Alternative stop command
+   ```
+
+5. Advanced Troubleshooting:
+   - Check service account permissions
+   - Verify the service executable path
+   - Run System File Checker:
+     ```cmd
+     sfc /scannow
+     ```
+   - Use DISM to repair Windows image:
+     ```cmd
+     DISM /Online /Cleanup-Image /RestoreHealth
+     ```
+
+6. Service Recovery Options:
+   - In service Properties → Recovery tab
+   - Configure automatic restart attempts
+   - Set recovery actions for first, second, and subsequent failures
+
+7. Additional Checks:
+   - Check disk space
+   - Scan for malware
+   - Review recent system changes
+   - Check Windows Update history
+
+8. Best Practices to Share:
+   - Document all changes made
+   - Create system restore point before major changes
+   - Keep notes of error messages
+   - Take screenshots of error conditions
+   - Maintain a log of troubleshooting steps tried
+
+Would you like me to elaborate on any of these steps or provide more specific guidance for certain types of service issues?
+
+### **System Resource Issues: Understanding and Troubleshooting the Four Major Components**
+
+System performance and stability depend on the efficient use of four major resources: **RAM**, **CPU/Processor**, **NIC (Network Interface Card)**, and **HDD/SSD**. Resource bottlenecks or issues in these components can degrade performance or cause system failures. Below is an overview of each resource, common issues, and troubleshooting methods.
+
+---
+
+### **1. RAM (Random Access Memory)**
+
+#### **Role of RAM**
+- Temporarily stores data and instructions needed by the CPU to execute tasks.
+- Faster than permanent storage, enabling quick data access.
+
+#### **Common RAM Issues**
+1. **High Memory Usage:** Applications or processes consuming excessive RAM.
+2. **Memory Leaks:** Programs not releasing memory after use, causing system slowdowns.
+3. **Insufficient RAM:** Running out of memory when multitasking or using resource-intensive applications.
+4. **Faulty RAM:** Physical issues causing system crashes or BSOD (Blue Screen of Death).
+
+#### **Troubleshooting RAM Issues**
+- **Check Usage:**
+  - Open **Task Manager** (`Ctrl + Shift + Esc`) and go to the **Performance** tab.
+  - Monitor memory usage under the **Memory** section.
+- **Close Resource-Intensive Applications:**
+  - Identify and close applications consuming excessive memory in the **Processes** tab.
+- **Run Memory Diagnostics:**
+  - Use **Windows Memory Diagnostic Tool** (`Win + R`, type `mdsched.exe`).
+- **Upgrade RAM:** Add more physical RAM if usage regularly exceeds capacity.
+
+---
+
+### **2. CPU/Processor**
+
+#### **Role of the CPU**
+- Executes instructions from software and performs computations.
+- Determines the overall speed and responsiveness of the system.
+
+#### **Common CPU Issues**
+1. **High CPU Usage:** Overloaded by demanding tasks or background processes.
+2. **Overheating:** Poor cooling leading to thermal throttling.
+3. **Hardware Failure:** Physical damage or degradation.
+4. **Software Conflicts:** Malicious software or poorly optimized programs causing excessive CPU load.
+
+#### **Troubleshooting CPU Issues**
+- **Check Usage:**
+  - Use **Task Manager** to identify processes causing high CPU usage.
+- **End Problematic Tasks:**
+  - Right-click the process in the **Processes** tab and select **End Task**.
+- **Update Drivers:**
+  - Update CPU and chipset drivers from the manufacturer’s website.
+- **Improve Cooling:**
+  - Clean fans and vents, or consider upgrading cooling solutions.
+- **Scan for Malware:**
+  - Run a full system scan with reliable antivirus software.
+- **Upgrade the CPU:** Replace with a more powerful processor if bottlenecks persist.
+
+---
+
+### **3. NIC (Network Interface Card)**
+
+#### **Role of the NIC**
+- Handles network communications, enabling internet and intranet connectivity.
+
+#### **Common NIC Issues**
+1. **Slow Network Speeds:** Caused by outdated drivers or incorrect settings.
+2. **Intermittent Connectivity:** Connection drops due to faulty hardware or interference.
+3. **Hardware Failure:** NIC not functioning or being recognized.
+4. **Driver Issues:** Incompatible or outdated NIC drivers.
+
+#### **Troubleshooting NIC Issues**
+- **Check Connection Status:**
+  - Go to **Settings > Network & Internet > Status**.
+- **Update Drivers:**
+  - Open **Device Manager**, find the NIC under **Network Adapters**, and update its driver.
+- **Reset Network Settings:**
+  - Run `netsh int ip reset` and `netsh winsock reset` in Command Prompt (`Run as Administrator`).
+- **Test Network Speed:**
+  - Use online tools (e.g., Speedtest.net) to measure performance.
+- **Replace NIC:** If hardware is damaged, install a new internal or external network card.
+
+---
+
+### **4. HDD/SSD (Storage Drives)**
+
+#### **Role of Storage Drives**
+- HDDs and SSDs store the operating system, applications, and data.
+- SSDs are faster and more reliable but typically costlier than HDDs.
+
+#### **Common HDD/SSD Issues**
+1. **Low Disk Space:** Insufficient free space for the OS or applications.
+2. **Slow Read/Write Speeds:** Fragmentation (HDDs), aging drives, or overheating.
+3. **Corrupted Files:** Data corruption caused by power loss or drive failure.
+4. **Drive Failure:** Mechanical issues in HDDs or memory wear in SSDs.
+
+#### **Troubleshooting HDD/SSD Issues**
+- **Check Disk Space:**
+  - Go to **This PC** and monitor available space for each drive.
+- **Run Disk Cleanup:**
+  - Use the built-in tool to delete temporary files and free space.
+- **Check Drive Health:**
+  - Run `chkdsk` or use tools like **CrystalDiskInfo** to monitor health and performance.
+- **Defragment (HDDs):**
+  - Use **Optimize Drives** (`Win + S`, search for **Defragment and Optimize Drives**).
+- **Update Firmware (SSDs):**
+  - Check the manufacturer’s website for firmware updates.
+- **Replace the Drive:**
+  - Clone data and replace aging or failing drives with new ones.
+
+---
+
+### **System Monitoring Tools**
+
+1. **Task Manager:** Provides an overview of CPU, memory, disk, and network usage.
+2. **Resource Monitor:**
+   - Accessed via Task Manager > Performance tab > **Open Resource Monitor**.
+   - Offers detailed insights into resource usage.
+3. **Performance Monitor:**
+   - Accessed via `perfmon` command, provides customizable monitoring tools.
+4. **Third-Party Tools:**
+   - Examples: **HWMonitor**, **Speccy**, **CrystalDiskInfo**.
+
+---
+
+### **Best Practices to Avoid Resource Issues**
+
+1. **Regular Updates:**
+   - Keep your operating system, drivers, and applications up to date.
+2. **Periodic Maintenance:**
+   - Clean temporary files and uninstall unnecessary software.
+3. **Upgrade Hardware:**
+   - Add more RAM, replace aging storage drives, or install a better CPU.
+4. **Monitor Resource Usage:**
+   - Regularly check resource utilization to catch potential issues early.
+5. **Ensure Proper Cooling:**
+   - Use efficient cooling solutions to avoid overheating.
+
+Efficient management of RAM, CPU, NIC, and storage resources ensures smooth and reliable system performance, reducing downtime and improving productivity.
 
 
