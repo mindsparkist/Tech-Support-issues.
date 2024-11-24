@@ -1529,4 +1529,281 @@ Tools like **CPU-Z**, **Speccy**, and **HWMonitor** provide detailed hardware in
 
 By using these tools and commands, you can effectively gather and analyze system information in Windows 10.
 
+### **Guide to Using Performance Monitor in Windows 10**
+
+Performance Monitor, or **PerfMon**, is a powerful tool in Windows 10 that allows users to monitor and analyze the performance of their computer in real-time or through collected data logs. This tool is useful for diagnosing performance issues, optimizing system performance, and tracking resource utilization over time.
+
+---
+
+### **What is Performance Monitor?**
+
+Performance Monitor provides:
+1. **Real-Time Monitoring**: View live data about system performance.
+2. **Data Collection**: Configure and save performance logs for later analysis.
+3. **Alerts and Thresholds**: Set up notifications for performance thresholds.
+4. **Reports**: Generate summaries of system performance over time.
+
+---
+
+### **How to Open Performance Monitor**
+
+1. Press `Win + S`, type **Performance Monitor**, and select it.
+2. Or, press `Win + R`, type `perfmon`, and hit Enter.
+
+---
+
+### **Key Features of Performance Monitor**
+
+#### **1. Real-Time Monitoring**
+Allows you to observe system activity and performance metrics in real-time.
+
+- **How to Use:**
+  1. In the left pane, expand **Monitoring Tools**.
+  2. Click **Performance Monitor**.
+  3. By default, the graph shows the **Processor Time** counter. 
+  4. Add counters for other resources:
+     - Click the **+** button above the graph.
+     - Select a counter (e.g., Memory, Disk, Network).
+     - Click **Add > OK**.
+
+- **Tips for Effective Use:**
+  - Focus on key counters such as **CPU Usage**, **Available Memory**, and **Disk Queue Length**.
+  - Adjust the graph scale for better visualization.
+
+---
+
+#### **2. Data Collector Sets**
+Data Collector Sets allow you to gather performance data over time for detailed analysis.
+
+- **How to Create a Data Collector Set:**
+  1. In the left pane, expand **Data Collector Sets > User Defined**.
+  2. Right-click **User Defined** and select **New > Data Collector Set**.
+  3. Enter a name and choose **Create Manually**.
+  4. Select the type of data to collect (e.g., performance counters, event traces).
+  5. Add specific counters and set the sample interval.
+  6. Specify the location to save the data and finish the setup.
+
+- **Use Case:**
+  - Use Data Collector Sets to monitor performance during specific periods (e.g., during heavy workloads).
+
+---
+
+#### **3. Reports**
+Analyze collected data from Data Collector Sets to identify performance trends and bottlenecks.
+
+- **How to Access Reports:**
+  1. In the left pane, expand **Reports > User Defined**.
+  2. Select the relevant Data Collector Set to view its report.
+
+- **Tips:**
+  - Look for spikes in CPU, memory, or disk usage to identify resource-intensive applications.
+  - Compare reports over time to track performance improvements or degradations.
+
+---
+
+#### **4. Alerts and Thresholds**
+Set up alerts to notify you when system performance exceeds specified thresholds.
+
+- **How to Create Alerts:**
+  1. In a Data Collector Set, select **Performance Counter Alert** during setup.
+  2. Add a counter and specify a threshold value (e.g., CPU usage > 80%).
+  3. Configure an action (e.g., send an email or run a script) when the alert is triggered.
+
+- **Use Case:**
+  - Automatically monitor critical systems and respond to performance issues.
+
+---
+
+#### **5. Resource View**
+Provides a detailed overview of current system resource usage.
+
+- **How to Access:**
+  - Open **Performance Monitor** and select **Resource View**.
+  - View information about CPU, disk, network, and memory usage in a tabular format.
+
+- **Use Case:**
+  - Quickly identify resource bottlenecks in real-time.
+
+---
+
+### **Key Performance Counters to Monitor**
+
+1. **CPU**
+   - **% Processor Time**: Indicates the percentage of time the CPU is actively processing.
+   - **Processor Queue Length**: Shows the number of processes waiting for CPU time.
+
+2. **Memory**
+   - **Available MBytes**: Indicates the amount of free memory.
+   - **Pages/sec**: Monitors the rate of paging to and from the disk.
+
+3. **Disk**
+   - **Disk Queue Length**: Shows how many requests are waiting to access the disk.
+   - **% Disk Time**: Measures the percentage of time the disk is busy.
+
+4. **Network**
+   - **Bytes Total/sec**: Measures the total data being sent and received.
+   - **Output Queue Length**: Indicates network congestion.
+
+---
+
+### **Use Cases of Performance Monitor**
+
+1. **Diagnose System Slowness**
+   - Identify high CPU or memory usage by specific processes.
+
+2. **Plan Upgrades**
+   - Use reports to justify hardware upgrades like more RAM or a faster processor.
+
+3. **Monitor Long-Term Trends**
+   - Collect data to observe performance changes over weeks or months.
+
+4. **Identify Hardware Bottlenecks**
+   - Pinpoint issues like disk contention or insufficient memory.
+
+5. **Optimize Applications**
+   - Monitor and adjust resource usage of custom or third-party applications.
+
+---
+
+### **Best Practices for Using Performance Monitor**
+
+1. **Start with Key Metrics:**
+   - Focus on CPU, memory, disk, and network usage to avoid overwhelming data.
+
+2. **Use Data Collector Sets:**
+   - Automate the collection of performance data during specific timeframes.
+
+3. **Correlate Metrics:**
+   - Combine CPU, memory, and disk data to diagnose multi-factor performance issues.
+
+4. **Export Data:**
+   - Save logs for future analysis using tools like Excel or third-party analyzers.
+
+5. **Schedule Monitoring:**
+   - Run Data Collector Sets during peak usage hours for the most meaningful data.
+
+---
+
+### **Conclusion**
+
+Performance Monitor is an essential tool for Windows 10 users to monitor and analyze system performance. By using its features effectively—real-time monitoring, data collection, and alerts—you can proactively manage system health, optimize performance, and quickly troubleshoot issues.
+
+Link - https://cumailin-my.sharepoint.com/:v:/g/personal/d23mca110423_cuchd_in/EXetcq6eiglDvP-hubSsv24BaReOGT1DtmYlbWLTNK8VWg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=89ub5E
+
+I'll explain the Windows Registry, its components, common issues, and troubleshooting approaches in detail.
+
+The Windows Registry is a hierarchical database that stores configuration settings and options for Microsoft Windows operating systems. It contains settings for low-level operating system components, applications, hardware, and user preferences.
+
+Registry Editor (Regedit):
+- A built-in Windows tool to view and modify the registry
+- Accessed by typing "regedit" in the Run dialog (Windows + R)
+- Requires administrative privileges to make changes
+
+Key Components:
+
+1. Registry Hives:
+- HKEY_LOCAL_MACHINE (HKLM): Contains system-wide settings
+- HKEY_CURRENT_USER (HKCU): Settings specific to the logged-in user
+- HKEY_USERS (HKU): Settings for all user profiles
+- HKEY_CURRENT_CONFIG: Current hardware configuration
+- HKEY_CLASSES_ROOT: File association and COM object registration
+
+2. Keys:
+- Similar to folders in a file system
+- Can contain subkeys and values
+- Organized in a hierarchical structure
+
+3. Values:
+- Stores the actual data
+- Common types include:
+  - String (REG_SZ)
+  - Binary (REG_BINARY)
+  - DWORD (32-bit number)
+  - Multi-String (REG_MULTI_SZ)
+
+Common Issues and Troubleshooting:
+
+1. Orphan Entries:
+- Registry entries pointing to non-existent programs
+- Caused by improper software uninstallation
+- Solution: Use reliable uninstaller programs or manually remove references
+
+2. Duplicate Keys:
+- Multiple entries for the same setting
+- Can cause conflicts and performance issues
+- Solution: Regular registry maintenance and careful software installation
+
+3. Malware:
+- Malicious software often modifies registry entries
+- Can add startup entries or modify system settings
+- Solution: 
+  - Use antivirus software
+  - Regular system scans
+  - Back up registry before cleaning
+  - Check startup entries in Registry
+
+4. Fragmentation:
+- Registry can become fragmented over time
+- Happens due to frequent installation/uninstallation
+- Solution: Registry defragmentation tools (use with caution)
+
+Effects of Registry Issues:
+
+1. Slow Booting:
+- Excessive startup entries
+- Corrupt registry entries
+- Solution: Clean startup entries, repair registry
+
+2. System Errors:
+- Missing or corrupt registry entries
+- Invalid file associations
+- Solution: System restore, registry repair
+
+3. PC Crashes:
+- Corrupt system settings
+- Conflicting entries
+- Solution: Registry backup and restore, clean install if necessary
+
+Third-Party Registry Cleanup Tools:
+- CCleaner
+- Wise Registry Cleaner
+- Auslogics Registry Cleaner
+
+Important Safety Tips:
+
+1. Always backup the registry before making changes:
+- In Regedit: File > Export
+- Save full registry backup regularly
+
+2. Use caution with registry cleaners:
+- Research tools thoroughly
+- Use reputable software only
+- Don't blindly delete entries
+
+3. Document changes:
+- Keep track of modifications
+- Note original values before changes
+
+4. Create system restore points:
+- Before major registry modifications
+- Enables recovery if issues occur
+
+Best Practices:
+
+1. Regular Maintenance:
+- Remove unused software properly
+- Keep system updated
+- Run reliable cleanup tools periodically
+
+2. Prevention:
+- Install software from trusted sources
+- Use proper uninstallation methods
+- Maintain updated security software
+
+3. Professional Help:
+- Seek expert assistance for major issues
+- Don't experiment with critical system entries
+- Consider professional repair tools
+
+The Windows Registry is crucial for system operation, but modifications should be made carefully. Always back up data before making changes, and when in doubt, consult technical documentation or professional support.
 
