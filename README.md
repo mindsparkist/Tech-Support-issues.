@@ -1401,4 +1401,132 @@ Efficient management of RAM, CPU, NIC, and storage resources ensures smooth and 
 By following these steps, you can effectively end unresponsive or unwanted tasks in Task Manager, improving your computer's performance and stability.
 
 
+### **System Information in Windows 10**
+
+Windows 10 provides several ways to access detailed information about the system's hardware, software, and configuration. This information can help diagnose issues, optimize performance, and support troubleshooting.
+
+---
+
+### **Ways to Access System Information**
+
+#### **1. System Information Tool (`msinfo32`)**
+The **System Information** tool provides a comprehensive overview of the system's hardware, software, and components.
+
+- **How to Open:**
+  1. Press `Win + R`, type `msinfo32`, and press Enter.
+  2. The **System Information** window will display details like:
+     - OS version
+     - Processor type
+     - Installed RAM
+     - BIOS/UEFI version
+     - Device and driver status
+     - Running services and software
+
+- **Use Case:**
+  - View hardware specifications.
+  - Identify driver or device issues.
+
+---
+
+#### **2. Settings App**
+The **Settings** app gives basic system details.
+
+- **How to Access:**
+  1. Press `Win + I` to open **Settings**.
+  2. Navigate to **System > About**.
+  3. Key details include:
+     - Device name
+     - Processor and RAM specifications
+     - Windows edition and version
+     - System type (32-bit or 64-bit)
+
+- **Use Case:**
+  - Quickly check device and OS information.
+
+---
+
+#### **3. Control Panel**
+The **System Properties** section in the Control Panel provides core system details.
+
+- **How to Access:**
+  1. Open the **Control Panel** (search for it in the Start Menu).
+  2. Navigate to **System and Security > System**.
+  3. Displays similar details to the **Settings** app.
+
+---
+
+#### **4. Task Manager**
+The **Performance** tab in Task Manager shows real-time hardware usage and some specifications.
+
+- **How to Open:**
+  1. Press `Ctrl + Shift + Esc` to open Task Manager.
+  2. Go to the **Performance** tab.
+  3. Details include:
+     - CPU: Name, speed, and core count
+     - Memory: Installed RAM and usage
+     - Disk: Type (HDD/SSD), capacity, and usage
+     - Network: Adapter name and activity
+
+- **Use Case:**
+  - Monitor resource usage alongside hardware details.
+
+---
+
+#### **5. Command Prompt and PowerShell**
+Command-line tools can display system information.
+
+##### **Command Prompt**
+- Open Command Prompt (`Win + R`, type `cmd`, and press Enter).
+- Commands:
+  - `systeminfo`: Displays detailed system information, including uptime, OS version, processor, and installed hotfixes.
+
+##### **PowerShell**
+- Open PowerShell (`Win + S`, type **PowerShell**, and press Enter).
+- Commands:
+  - `Get-ComputerInfo`: Provides a detailed report of the system's configuration.
+
+---
+
+#### **6. DirectX Diagnostic Tool (dxdiag)**
+The **DirectX Diagnostic Tool** is useful for analyzing graphics, sound, and input devices.
+
+- **How to Open:**
+  1. Press `Win + R`, type `dxdiag`, and press Enter.
+  2. View information about:
+     - Display (graphics card)
+     - Sound devices
+     - Input devices (mouse, keyboard)
+
+- **Use Case:**
+  - Diagnose graphics or sound issues.
+
+---
+
+#### **7. Third-Party Tools**
+Tools like **CPU-Z**, **Speccy**, and **HWMonitor** provide detailed hardware information, often beyond what Windows tools offer.
+
+- **Key Features:**
+  - Real-time temperature monitoring.
+  - Detailed motherboard, CPU, and GPU specifications.
+  - Voltage and power usage data.
+
+---
+
+### **Examples of Information Available**
+- **Processor:** Model, speed, core count, architecture.
+- **RAM:** Installed capacity, usage, and speed.
+- **Storage:** Type, capacity, and partition details.
+- **Graphics Card:** Model, driver version, and memory.
+- **OS Details:** Windows version, build number, and activation status.
+
+---
+
+### **Why System Information Matters**
+1. **Troubleshooting:** Diagnose hardware or software issues.
+2. **Upgrades:** Identify components for replacement or upgrade.
+3. **System Audits:** Inventory hardware and software for compliance.
+4. **Performance Monitoring:** Ensure components are functioning optimally.
+
+By using these tools and commands, you can effectively gather and analyze system information in Windows 10.
+
 
