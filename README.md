@@ -1377,4 +1377,28 @@ System performance and stability depend on the efficient use of four major resou
 
 Efficient management of RAM, CPU, NIC, and storage resources ensures smooth and reliable system performance, reducing downtime and improving productivity.
 
+**Here's a step-by-step guide on how to end a task in Task Manager:**
+
+1. **Open Task Manager:**
+   * **Windows 11/10:**
+     - Right-click on the taskbar and select "Task Manager"
+     - Press **Ctrl+Shift+Esc**
+   * **Older Windows Versions:**
+     - Press **Ctrl+Alt+Delete** and select "Task Manager"
+
+2. **Locate the Unresponsive Task:**
+   * **Processes Tab:** This tab lists all running processes. Find the process you want to end.
+   * **Apps Tab:** This tab lists running apps. Find the unresponsive app and select it.
+
+3. **End the Task:**
+   * **Right-click** on the process or app and select **"End task"**.
+   * Alternatively, you can select the process and click the **"End Task"** button at the bottom of the window.
+
+**Important Note:**
+* **Unsaved Work:** Ending a task forcefully can lead to the loss of unsaved data. Make sure to save your work before ending a task.
+* **System Processes:** Be cautious when ending system processes. Ending critical system processes might cause system instability or crashes.
+
+By following these steps, you can effectively end unresponsive or unwanted tasks in Task Manager, improving your computer's performance and stability.
+
+
 
