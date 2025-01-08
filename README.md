@@ -2015,4 +2015,93 @@ Microsoft Autoruns is a powerful utility from Microsoft's Sysinternals suite des
 
 By using Autoruns, you can gain a better understanding of what's starting up on your system and take control of your computer's startup behavior.
 
+The Windows Task Scheduler is a powerful built-in tool that allows you to automate various tasks on your Windows 10 computer. Here's a breakdown:
+
+**What it does:**
+
+* **Schedules tasks:** You can schedule tasks to run at specific times, on specific days, or based on events (like system startup or user logon).
+* **Automates actions:** These tasks can include:
+    * Running programs or scripts
+    * Sending emails
+    * Displaying messages
+    * Backing up files
+    * And much more
+
+**How to access it:**
+
+1. **Search:** Type "Task Scheduler" in the Windows search bar and press Enter.
+
+**Key features:**
+
+* **Triggers:** Define when a task should run:
+    * **Time-based:** Schedule tasks for specific times, daily, weekly, monthly, or at startup/logon.
+    * **Event-based:** Trigger tasks based on system events (like user logon, system startup/shutdown) or other applications.
+* **Actions:** Specify what the task should do:
+    * **Start a program:** Run any executable file (e.g., a batch file, a program shortcut).
+    * **Send an email:** Compose and send emails automatically.
+    * **Display a message:** Show a message on the screen.
+    * **Run a script:** Execute PowerShell scripts or other scripting languages.
+* **Conditions:** Set conditions for task execution:
+    * **Power:** Only run the task when the computer is on battery or AC power.
+    * **Disk space:** Only run if sufficient disk space is available.
+    * **Network availability:** Only run if a network connection is available.
+* **Security options:** Control who can run or modify the task.
+
+**Example use cases:**
+
+* **Daily backups:** Schedule automatic backups of important files.
+* **System maintenance:** Run disk cleanup or defragmentation tasks at night.
+* **Software updates:** Automatically check for and install software updates.
+* **Email reminders:** Schedule reminders for appointments or deadlines.
+
+**Tips for using Task Scheduler:**
+
+* **Start simple:** Begin with basic tasks and gradually increase complexity.
+* **Test thoroughly:** Test your tasks to ensure they run as expected.
+* **Use descriptive names:** Give your tasks clear and informative names.
+* **Review and maintain:** Regularly review and update your scheduled tasks.
+
+By effectively using the Windows Task Scheduler, you can automate many routine tasks, saving time and effort while improving your system's efficiency.
+
+**1. Open Task Scheduler**
+
+* Search for "Task Scheduler" in the Windows search bar and press Enter.
+
+**2. Create a Basic Task**
+
+* In the Task Scheduler Library, right-click and select "Create Basic Task."
+
+**3. Name the Task**
+
+* Enter a descriptive name for your task (e.g., "Run Notepad Daily").
+* Click "Next."
+
+**4. Set Trigger**
+
+* **Frequency:** Choose "Daily."
+* **Time:** Set the specific time you want the task to run daily.
+* Click "Next."
+
+**5. Choose Action**
+
+* Select "Start a program."
+* Click "Next."
+
+**6. Specify Program**
+
+* **Program/script:** Click "Browse" and navigate to the program you want to run (e.g., "notepad.exe").
+* **Add arguments (optional):** If the program requires any arguments, enter them here.
+* Click "Next."
+
+**7. Summary**
+
+* Review the task summary.
+* Click "Finish."
+
+**Congratulations!** You've successfully created a basic task in Windows Task Scheduler. 
+
+This task will now run Notepad daily at the specified time. You can modify or delete this task at any time by right-clicking on it in the Task Scheduler Library.
+
+**Note:** This is a simple example. You can customize triggers, actions, and conditions to create more complex and automated tasks.
+
 
