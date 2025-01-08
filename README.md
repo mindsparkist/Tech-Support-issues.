@@ -1807,3 +1807,93 @@ Best Practices:
 
 The Windows Registry is crucial for system operation, but modifications should be made carefully. Always back up data before making changes, and when in doubt, consult technical documentation or professional support.
 
+**1. Querying Registry Values**
+
+* **Using `reg query`:**
+
+   - **Syntax:**
+      ```
+      reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion" /v ProductName
+      ```
+
+   - **Explanation:**
+      - `reg query`: This command is used to query registry values.
+      - `"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion"`: This specifies the path to the registry key you want to query.
+      - `/v ProductName`: This specifies the name of the value you want to retrieve.
+
+* **Using PowerShell:**
+
+   - **Syntax:**
+      ```powershell
+      Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion" -Name ProductName
+      ```
+
+   - **Explanation:**
+      - `Get-ItemProperty`: This cmdlet retrieves the properties (values) of a registry key.
+      - `-Path`: Specifies the path to the registry key.
+      - `-Name`: Specifies the name of the value to retrieve.
+
+**2. Creating Registry Values**
+
+* **Using `reg add`:**
+
+   - **Syntax:**
+      ```
+      reg add "HKEY_CURRENT_USER\Software\MyApplication" /v "MyValue" /t REG_SZ /d "MyValueData"
+      ```
+
+   - **Explanation:**
+      - `reg add`: This command is used to create new registry values.
+      - `"HKEY_CURRENT_USER\Software\MyApplication"`: This specifies the path to the registry key where you want to create the value.
+      - `/v "MyValue"`: This specifies the name of the new value.
+      - `/t REG_SZ`: This specifies the data type of the value (in this case, a string).
+      - `/d "MyValueData"`: This specifies the value data.
+
+* **Using PowerShell:**
+
+   - **Syntax:**
+      ```powershell
+      New-ItemProperty -Path "HKCU:\Software\MyApplication" -Name "MyValue" -Value "MyValueData" -PropertyType String
+      ```
+
+   - **Explanation:**
+      - `New-ItemProperty`: This cmdlet creates a new registry key and assigns it a value.
+      - `-Path`: Specifies the path to the registry key.
+      - `-Name`: Specifies the name of the new value.
+      - `-Value`: Specifies the value data.
+      - `-PropertyType`: Specifies the data type of the value.
+
+**3. Modifying Registry Values**
+
+* **Using `reg edit`:**
+
+   - **Navigate to the registry key:** Open the Registry Editor (`regedit`) and navigate to the desired key.
+   - **Modify the value:** Double-click the value you want to modify and change its data in the Edit dialog box.
+
+* **Using `reg add` with `/f` flag:**
+
+   - **Syntax:**
+      ```
+      reg add "HKEY_CURRENT_USER\Software\MyApplication" /v "MyValue" /t REG_SZ /d "NewMyValueData" /f
+      ```
+
+   - **Explanation:**
+      - The `/f` flag allows you to overwrite existing values.
+
+* **Using PowerShell:**
+
+   - **Syntax:**
+      ```powershell
+      Set-ItemProperty -Path "HKCU:\Software\MyApplication" -Name "MyValue" -Value "NewMyValueData"
+      ```
+
+   - **Explanation:**
+      - `Set-ItemProperty`: This cmdlet modifies the value of an existing registry key.
+
+**Important Notes:**
+
+- **Be extremely cautious when modifying the registry.** Incorrect modifications can render your system unstable or inoperable.
+- **Always back up your registry before making any significant changes.**
+- **Consider using a registry editor with undo/redo capabilities for safer modifications.**
+
+These commands provide a basic understanding of how to query, create, and modify registry values. You can find more advanced options and examples in the official documentation for `reg` and PowerShell.
