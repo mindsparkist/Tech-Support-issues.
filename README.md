@@ -1939,3 +1939,29 @@ These commands provide a basic understanding of how to query, create, and modify
 
 By following these methods, you can create a system restore point or manually back up your registry, providing a safety net in case of system problems or accidental changes.
 
+You can roll back a recent Windows update in a few ways:
+
+**1. Using the "Go Back" option (available for a limited time):**
+
+* **Open Settings:** Press the Windows key + I.
+* **Go to Update & Security:** Click on "Recovery" in the left-hand menu.
+* **Click "Go back to the previous version of Windows 10/11."** This option is usually available for up to 10 days after an update.
+* **Follow the on-screen instructions.**
+
+**2. Uninstall the specific update:**
+
+* **Open Settings:** Press the Windows key + I.
+* **Go to Update & Security:** Click on "View update history."
+* **Click "Uninstall updates."**
+* **Find the problematic update in the list:** Right-click on it and select "Uninstall."
+* **Follow the on-screen prompts.**
+
+**Important Notes:**
+
+* **Time Limit:** The "Go Back" option is only available for a short time after an update.
+* **Data Loss:** Rolling back an update may result in some data loss, so it's recommended to back up important files before proceeding.
+* **System Stability:** Rolling back updates can sometimes cause system instability. 
+
+I hope this helps! Let me know if you have any other questions.
+
+
