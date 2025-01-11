@@ -2231,5 +2231,26 @@ Here, you can:
 
 I hope this information is helpful! Let me know if you have any other questions.
 
+**Windows Update Servicing Models** offer different approaches to keep Windows up-to-date. Here’s a breakdown:
+
+1. **Semi-Annual Channel (SAC) - Current Branch (CB)**:
+   - **Purpose**: To provide feature updates with new capabilities and improvements.
+   - **Update Frequency**: Twice a year (spring and fall).
+   - **Target Audience**: Consumers and general users who want to experience the latest features.
+
+2. **Semi-Annual Channel (SAC) - Current Branch for Business (CBB)**:
+   - **Purpose**: Similar to the CB, but with an additional period for business validation.
+   - **Update Frequency**: Twice a year, but businesses can choose to defer updates the updates are manageable by Group Policy.
+   - **Target Audience**: Business users who prefer stability and need time to test updates.
+   - **Update** : Feature Update for one year and security and quality updates for 30 days. 
+
+3. **Long-Term Servicing Channel (LTSC)**:
+   - **Purpose**: To provide a stable and secure environment with minimal feature changes.
+   - **Update Frequency**: Every 2-3 years.
+   - **Target Audience**: Specialized devices and critical systems that require long-term stability.
+   - **Update** : Feature Update for ten years and security and quality updates for 30 days.
+
+This allows users to choose the best fit for their needs, balancing the latest features with stability and security. If you need more details on any of these, feel free to ask!
+
 
 
