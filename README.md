@@ -492,3 +492,47 @@ If you're troubleshooting a network connectivity issue, you might look in the "S
 * **Use Event Viewer Tools:** Event Viewer provides built-in tools like "Clear All Events" and "Save Selected Events" for managing logs.
 
 By effectively using Event Viewer, you can gain valuable insights into your system's health, troubleshoot issues, and monitor security events.
+
+There are several IT support tools available for checking hard disk health, fan speed, CPU, memory, and storage. Here are some popular ones:
+
+### 1. **Hard Disk Health:**
+   - **CrystalDiskInfo**: A lightweight tool that provides detailed information about the health of your hard drives, including temperature, S.M.A.R.T. status, and more.
+   - **HD Tune**: Offers a range of features including error scanning, health status, and benchmarking for hard drives.
+   - **SMART Monitoring Tools (smartctl)**: A command-line tool that provides detailed S.M.A.R.T. information for hard drives.
+
+### 2. **Fan Speed:**
+   - **SpeedFan**: A tool that can read temperatures, voltages, and fan speeds. It can also adjust fan speeds based on temperature readings.
+   - **HWMonitor**: Provides real-time monitoring of fan speeds, temperatures, and voltages.
+   - **Open Hardware Monitor**: An open-source tool that monitors fan speeds, temperatures, voltages, and clock speeds.
+
+### 3. **CPU Monitoring:**
+   - **CPU-Z**: Provides detailed information about your CPU, including clock speed, core voltage, and cache size.
+   - **Core Temp**: Monitors CPU temperature and load in real-time.
+   - **HWInfo**: A comprehensive tool that provides detailed information about your CPU, including temperatures, clock speeds, and power usage.
+
+### 4. **Memory (RAM) Monitoring:**
+   - **MemTest86**: A thorough memory testing tool that checks for errors in your RAM.
+   - **Windows Memory Diagnostic**: Built into Windows, this tool can test your RAM for errors.
+   - **HWInfo**: Also provides detailed information about your system's memory, including usage and speed.
+
+### 5. **Storage Monitoring:**
+   - **CrystalDiskMark**: A disk benchmarking tool that measures the read and write speeds of your storage devices.
+   - **SSD Life**: Specifically designed for SSDs, this tool monitors the health and lifespan of your SSD.
+   - **DiskCheckup**: Provides S.M.A.R.T. monitoring and performance analysis for hard drives and SSDs.
+
+### 6. **All-in-One System Monitoring Tools:**
+   - **HWInfo**: Offers comprehensive monitoring of CPU, GPU, memory, storage, and more.
+   - **AIDA64**: A powerful system diagnostics and benchmarking tool that provides detailed information about all aspects of your system.
+   - **Speccy**: A lightweight tool that provides a summary of your system's hardware, including CPU, RAM, storage, and more.
+
+### 7. **BIOS/UEFI:**
+   - **System BIOS/UEFI**: Many modern motherboards have built-in monitoring tools accessible through the BIOS/UEFI interface, which can provide information on CPU temperature, fan speeds, and system health.
+
+### 8. **Operating System Built-in Tools:**
+   - **Windows Task Manager**: Provides basic information on CPU, memory, and disk usage.
+   - **Resource Monitor**: A more detailed tool in Windows that provides information on CPU, memory, disk, and network usage.
+   - **Linux Command-Line Tools**: Tools like `top`, `htop`, `vmstat`, `iostat`, and `smartctl` can be used to monitor system health on Linux systems.
+
+These tools can help you diagnose and monitor the health and performance of your system components. Always ensure you download these tools from reputable sources to avoid malware.
+
+
