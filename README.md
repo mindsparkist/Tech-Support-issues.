@@ -406,7 +406,7 @@ klist purge -li 0x3e7  # Purges Kerberos tickets for the System account
 1. Log in using the **Local Administrator** account.
 2. Ensure the DNS settings are pointing to your **Internal Domain Controllers** (referencing your earlier points on DNS resolution).
 3. Go back to **sysdm.cpl > Change**.
-4. Select **Domain** and enter the FQDN (e.g., `corp.deloitte.com`).
+4. Select **Domain** and enter the FQDN (e.g., `corp.company.com`).
 5. Enter Domain Admin (or Account Operator) credentials when prompted.
 
 ### Step 6: Verification
@@ -480,7 +480,7 @@ After a "Workstation Trust" fix, you might encounter these two specific headache
 
 If the machine is on a slow Wi-Fi connection, Windows may skip "heavy" GPOs (like software installation).
 
-* **Fix:** You can disable Slow Link Detection in the registry or via a local policy if the Hyderabad office network is undergoing maintenance.
+* **Fix:** You can disable Slow Link Detection in the registry or via a local policy if the  office network is undergoing maintenance.
 
 ### B. Replication Latency (The "Wait" Factor)
 
