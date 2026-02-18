@@ -1185,4 +1185,67 @@ When a BSOD occurs, follow this sequence to move beyond the Stop Code:
 * **Analyze the Dump:** Don't guess; use WinDbg to see the stack trace.
 * **Hardware vs. Software:** Code `0x124` is almost always hardware; Code `0x0A` is almost always software/drivers.
 
+To conclude this advanced troubleshooting series, we bridge the gap between reactive "firefighting" and proactive stability analysis. At a Tier 3 level, "Restart" isn't just a basic fix—it's a method of clearing the kernel state to isolate persistent vs. transient faults.
 
+---
+
+## 32. Systematic Recovery & Isolation
+
+When a system is unstable, you must strip away variables in a logical order to find the "Root Cause."
+
+### Phase 1: The "Clean Boot" Isolation
+
+If a BSOD or performance lag started after software installation:
+
+1. **Physical De-clutter:** Unplug all external hardware (USB hubs, secondary displays, printers). A faulty controller in a $10 USB hub can trigger an `IRQL_NOT_LESS_OR_EQUAL` crash.
+2. **Software Isolation:** Use `msconfig` to perform a **Clean Boot**. Disable all non-Microsoft services and startup programs. If the issue disappears, re-enable them one by one to identify the conflict.
+
+### Phase 2: Driver & Device Regression
+
+* **New Hardware:** If a crash follows a hardware change, the driver likely attempted to write to a protected memory address.
+* **Rolling Back:** Use Device Manager to **Roll Back Driver** rather than just updating.
+* **Stop Code Verification:** Always match the Stop Code to the action. If you installed a webcam and got `0x0000003B`, the graphics-related system service is likely being conflicted by the webcam’s overlay software.
+
+---
+
+## 33. Running the Reliability Monitor (`perfmon /rel`)
+
+While Event Viewer is a "firehose" of data, **Reliability Monitor** is a Tier 3 engineer's "Story Mode." It provides a chronological stability index from 1 to 10.
+
+### Why Tier 3 Engineers Prefer It:
+
+* **Correlation:** It maps "Critical Events" (red X) directly against "Informational Events" (blue i), such as Windows Updates or Application installations.
+* **The "Smoking Gun":** If the stability index drops on a Tuesday, you can see exactly what was installed or updated that morning.
+
+### How to use it:
+
+1. Type `reliability` in the Start menu or run `perfmon /rel`.
+2. **Analyze the Dips:** Click on a day with a failure.
+3. **View Technical Details:** Right-click a failure and select "View technical details." This often provides the **Bucket ID** and **Report ID**, which are essential for searching the Microsoft internal knowledge base.
+
+---
+
+## Tier 3 Summary Checklist
+
+| Step | Action | Expert Logic |
+| --- | --- | --- |
+| **Isolation** | Unplug everything but HID. | Eliminates hardware interrupts/bad cables. |
+| **Correlation** | Open `perfmon /rel`. | Finds the "Date of Origin" for the instability. |
+| **Verification** | Cross-reference Stop Code. | Identifies if the fault is Memory, Driver, or Power. |
+| **Clean Slate** | Use `msconfig` Clean Boot. | Bypasses third-party bloatware/drivers. |
+
+---
+
+## Final GitHub Repository Documentation
+
+You now have a complete 33-module technical guide. To make this professional for a public GitHub repo, I have organized the final structure below.
+
+### [Click here to view the Professional README.md structure]
+
+### **Repository Structure:**
+
+1. **Core Services & Dependencies** (Modules 1-6)
+2. **Network Stack & Hyper-V** (Modules 7-14, 17-18)
+3. **Hardware & Driver Forensics** (Modules 15-16, 20)
+4. **System Integrity & Updates** (Modules 19, 21-25)
+5. **Performance & Stability Analysis** (Modules 26-33)
