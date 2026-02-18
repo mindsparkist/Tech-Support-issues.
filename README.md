@@ -850,3 +850,118 @@ sfc /scannow /offbootdir=D:\ /offwindir=D:\Windows
 | **DISM** | Repairs the Windows Image (WinSxS). | Fixing the "Source" when SFC fails. |
 | **CHKDSK** | Repairs the File System / Hardware. | Use before SFC if you suspect disk errors. |
 
+To wrap up this technical repository, we focus on the **Update and Maintenance** layer. In an enterprise environment, keeping the Windows build version consistent and ensuring the update agent is healthy is critical for security compliance.
+
+---
+
+## 21. Restoring a System's Health (The Automated Cleanup)
+
+As a Tier 3 engineer, when manual repairs (SFC/DISM) have been exhausted, you can use the built-in maintenance tasks to force a "Deep Clean" of the component store and system health state.
+
+* **The Command:** ```powershell
+# Manually trigger the StartComponentCleanup task
+
+
+Dism /Online /Cleanup-Image /StartComponentCleanup
+```
+
+```
+
+
+* **Why this works:** It removes superseded versions of components, reducing the size of the `WinSxS` folder and clearing out metadata that might be causing conflicts during health restoration. Follow this with a `/RestoreHealth` command for a total system refresh.
+
+---
+
+## 22. Verify Your Windows Build Number
+
+Knowing the exact build is vital for troubleshooting "Known Issues" (KIs) documented by Microsoft. A feature that works in version **22H2** might be broken in **23H2**.
+
+### Methods to Verify:
+
+1. **The Quick Way (GUI):** Type `winver` in the search bar. This displays the version and build number (e.g., Build 22631.xxxx).
+2. **The Engineer's Way (CLI):** ```cmd
+systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
+```
+
+```
+
+
+3. **The PowerShell Way:**
+```powershell
+Get-ComputerInfo | Select-Object WindowsProductName, WindowsVersion, WindowsBuildLabEx
+
+```
+
+
+*This provides the "BuildLabEx," which includes the revision date—essential for checking if a specific security patch has been applied.*
+
+---
+
+## 23. Running Windows Update
+
+While the GUI is common, Tier 3 engineers often need to manage updates via the command line, especially on remote or headless servers.
+
+### The PowerShell Module (PSWindowsUpdate)
+
+By default, Windows doesn't have a robust CLI for updates. Installing the `PSWindowsUpdate` module is standard practice:
+
+```powershell
+# Install the module
+Install-Module PSWindowsUpdate
+
+# Check for updates
+Get-WindowsUpdate
+
+# Install all updates and reboot automatically
+Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot
+
+```
+
+### Manual Patching (MSU Files)
+
+If the Windows Update service is failing, download the standalone `.msu` file from the **Microsoft Update Catalog** and install it via the Windows Update Standalone Installer:
+
+```cmd
+wusa.exe C:\Path\To\Patch.msu /quiet /norestart
+
+```
+
+---
+
+## 24. Using the Windows Update Troubleshooter
+
+When updates hang (e.g., "Getting things ready" stays at 0%), the Windows Update agent database is likely corrupted.
+
+### The Standard Approach
+
+Navigate to **Settings > System > Troubleshoot > Other troubleshooters** and run **Windows Update**. This restarts the `wuauserv` and `bits` services and renames the `SoftwareDistribution` folder.
+
+### The Tier 3 "Manual Reset" (The "Nuclear" Option)
+
+If the troubleshooter fails, you must manually purge the update folders. This clears the update history and forces the agent to start fresh.
+
+**The Scripted Steps:**
+
+1. **Stop Services:** `net stop wuauserv`, `net stop cryptSvc`, `net stop bits`, `net stop msiserver`.
+2. **Rename Folders:**
+```cmd
+ren C:\Windows\SoftwareDistribution SoftwareDistribution.old
+ren C:\Windows\System32\catroot2 catroot2.old
+
+```
+
+
+3. **Restart Services:** `net start wuauserv` (and the others).
+4. **Force Detection:** `wuauclt /detectnow`
+
+---
+
+### Master Summary of Maintenance Tools
+
+| Goal | Tool/Command | Tier 3 Tip |
+| --- | --- | --- |
+| **Clear Old Patches** | `Dism /StartComponentCleanup` | Reduces disk footprint significantly. |
+| **Check Version** | `winver` / `systeminfo` | Check against Microsoft's "Known Issues" list. |
+| **Install MSU** | `wusa.exe` | Best for air-gapped or broken systems. |
+| **Reset WU Agent** | Rename `SoftwareDistribution` | Fixes 90% of "stuck" update issues. |
+
