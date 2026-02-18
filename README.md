@@ -672,3 +672,181 @@ w32tm /query /source
 | **Apply Config** | `gpupdate /force` | Pull down the latest NTP GPO settings. |
 | **Hard Reset** | `w32tm /config /update` | Notify the service that the configuration has changed. |
 
+
+When you reach Tier 3, `chkdsk` is no longer just a "magic command" to fix a slow PC. It is a surgical tool used to diagnose and repair **file system metadata corruption**, bad sectors, and dirty bit inconsistencies that can cause server hangs or volume-level data loss.
+
+At this level, you aren't just running the tool; you are analyzing the **VCN (Virtual Cluster Number)** and **MFT (Master File Table)** health.
+
+---
+
+## 19. Advanced Disk Repair (CHKDSK)
+
+### The "Dirty Bit" Logic
+
+Before running a repair, a Tier 3 engineer checks if Windows has already flagged the volume as "dirty." This flag is set when the OS detects an improper shutdown or a metadata mismatch.
+
+* **Query Status:** ```cmd
+fsutil dirty query C:
+```
+*If the volume is dirty, a CHKDSK on reboot is mandatory for system stability.*
+
+
+```
+
+
+
+---
+
+### Command Line Precision
+
+Avoid running a generic scan. Use specific switches based on the symptoms:
+
+* **Standard Repair (`/f`):** Fixes errors on the disk. The disk must be locked (usually requires a reboot for the C: drive).
+* **Deep Sector Recovery (`/r`):** Includes `/f` but also locates **bad sectors** and recovers readable information.
+* *Warning:* On large volumes (multi-terabyte), this can take 24+ hours.
+
+
+* **The "Spot Fix" (`/spotfix`):** (Windows 8/10/11) Performs "online" self-healing. It logs issues to a list and then fixes them in seconds during a brief reboot, rather than scanning the entire drive.
+* **Offline Scan (`/offlinescanandfix`):** Runs an offline scan and queues everything for repair.
+
+---
+
+### Tier 3 Workflow: The Systematic Approach
+
+#### 1. Pre-Check (Read-Only)
+
+Never run a repair on a critical server without a read-only scan first. This allows you to estimate the damage without taking the volume offline.
+
+```cmd
+chkdsk C:
+
+```
+
+Look for: *"Windows has found problems with the file system."* If this appears, schedule downtime.
+
+#### 2. Analyzing the Event Logs (Wininit)
+
+Since `chkdsk` often runs during the boot sequence, you cannot see the live output. You must retrieve it from the **Windows Logs**:
+
+1. Open **Event Viewer**.
+2. Go to **Windows Logs > Applications**.
+3. Filter for **Source: Wininit** (for boot-time scans) or **Chkdsk** (for manual scans).
+4. Analyze the **5 Stages** of the scan to see which files or indexes were corrected.
+
+---
+
+### Advanced Recovery: When CHKDSK Hangs
+
+If `chkdsk` hangs at a certain percentage (e.g., 12% or 27%), you are likely dealing with a physical hardware failure (failing NAND in SSDs or a "head crash" in HDDs).
+
+* **The Tier 3 Move:** Immediately stop attempting software repairs. Use a tool like `ddrescue` or a hardware cloner to image the drive before the physical component fails completely.
+* **VSS Conflict:** Sometimes the **Volume Shadow Copy Service (VSS)** interferes with a lock. Stop the VSS service before running an online scan to ensure accuracy.
+
+---
+
+### Summary Table: Which Switch to Use?
+
+| Symptom | Command | Impact |
+| --- | --- | --- |
+| **System is "Dirty"** | `chkdsk /f` | Medium (Requires Reboot) |
+| **Suspected Bad Sectors** | `chkdsk /r` | High (Long Downtime) |
+| **Fastest Repair (Win 10/11)** | `chkdsk /spotfix` | Low (Seconds to fix) |
+| **Analyze without fixing** | `chkdsk /scan` | Zero (Online scan) |
+
+In a Tier 3 escalation environment, the **System File Checker (SFC)** is rarely used in isolation. While Tier 1 might run `sfc /scannow` as a "catch-all" fix, a Senior Engineer uses it as the final step in a broader repair chain involving the **Component Store (WinSxS)** and **DISM**.
+
+If SFC fails, it’s usually because the "source of truth" (the local image it uses to compare files) is itself corrupted.
+
+---
+
+## 20. Advanced System Integrity Repair (SFC)
+
+### The Component Store (WinSxS) Logic
+
+Windows doesn't keep a backup of every file in a simple folder. It uses the **Component Store (`C:\Windows\WinSxS`)**. When you run SFC, it compares the active system files against the hard-linked copies in WinSxS. If WinSxS is corrupted, SFC will return the dreaded error: *"Windows Resource Protection found corrupt files but was unable to fix some of them."*
+
+### The Tier 3 "Golden Chain" Workflow
+
+To ensure a 100% success rate, always follow this specific sequence:
+
+#### 1. Analyze Component Store Health
+
+Before repairing, check if the store is actually damaged.
+
+```powershell
+Dism /Online /Cleanup-Image /CheckHealth
+
+```
+
+#### 2. Repair the "Source of Truth" (DISM)
+
+If corruption is found, use DISM to pull fresh, healthy bits from Windows Update (or a mounted ISO) to fix the WinSxS folder.
+
+```powershell
+Dism /Online /Cleanup-Image /RestoreHealth
+
+```
+
+*Note: If the machine is offline, use `/Source:WIM:D:\Sources\install.wim:1 /LimitAccess` to point to a known healthy image.*
+
+#### 3. Execute the Final Repair (SFC)
+
+Now that the source is healthy, run SFC to replace the active, corrupted system files.
+
+```powershell
+sfc /scannow
+
+```
+
+---
+
+## Analyzing the CBS.log (Deep Dive)
+
+A Tier 3 engineer doesn't just look at the Command Prompt output; they read the **CBS (Component Based Servicing)** log to see exactly which file failed.
+
+The log at `C:\Windows\Logs\CBS\CBS.log` is massive. To extract only the SFC-specific entries, use this findstr command:
+
+```cmd
+findstr /c:"[SR]" %windir%\Logs\CBS\CBS.log > %userprofile%\Desktop\sfcdetails.txt
+
+```
+
+### What to look for in `sfcdetails.txt`:
+
+* **"Cannot repair member file"**: This tells you the specific `.dll` or `.sys` file that is stuck.
+* **"Repaired file"**: Confirms which files were successfully swapped.
+* **"Overlap: Duplicate ownership"**: Indicates a deeper registry conflict where two components claim the same file—this often requires manual registry intervention.
+
+entries for system file repairs]
+
+---
+
+## Troubleshooting SFC "Stuck" Scenarios
+
+### 1. Pending Reboots
+
+SFC cannot replace files that are currently in use by the kernel. If a scan fails or hangs, check for a pending rename operation:
+
+* Look at the Registry Key: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\PendingFileRenameOperations`. If this is populated, reboot and try again.
+
+### 2. Running SFC Offline (WinPE)
+
+If Windows cannot boot, you must run SFC from a Recovery Environment (WinRE/WinPE). You must point SFC to the correct offline boot and windows directories:
+
+```cmd
+sfc /scannow /offbootdir=D:\ /offwindir=D:\Windows
+
+```
+
+*(In WinPE, the C: drive often becomes D: or another letter—always verify with `diskpart` first.)*
+
+---
+
+### Summary Table: SFC vs. DISM
+
+| Tool | Primary Function | Tier 3 Use Case |
+| --- | --- | --- |
+| **SFC** | Repairs active system files. | Final polish after a corruption event. |
+| **DISM** | Repairs the Windows Image (WinSxS). | Fixing the "Source" when SFC fails. |
+| **CHKDSK** | Repairs the File System / Hardware. | Use before SFC if you suspect disk errors. |
+
