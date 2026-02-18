@@ -349,3 +349,86 @@ This is the "bridge" between the VM and the physical network.
 When you create an **External Virtual Switch**, Windows creates a "Bridge Adapter." Your physical NIC will no longer have an IP; instead, the "Virtual Ethernet Adapter" handles the traffic. If you lose internet after installing Hyper-V, check the **Virtual Switch Manager** to ensure the bridge was created correctly.
 
 ---
+
+This is one of the classic "Active Directory Desync" scenarios. As a Tier 3 engineer, you know this isn't just a "network error"—it’s a **Secure Channel failure**.
+
+The workstation has a password (stored in the LSA secrets) that no longer matches the password for its Computer Object in the Active Directory (AD). This usually happens due to a snapshot restore, a long period of inactivity, or a metadata cleanup on the Domain Controller.
+
+Here is the Tier 3 "Clean Rejoin" workflow to resolve the trust relationship.
+
+---
+
+## The Strategic Objective
+
+We need to break the existing, broken secure channel and force the creation of a new **Kerberos ticket** and computer password.
+
+### Step 1: Capture Local Admin Credentials
+
+Before you touch the domain settings, **ensure you have the local administrator password**. Once you remove the machine from the domain, you will not be able to log in with your domain credentials.
+
+* **Pro Tip:** Use `whoami` to verify you are currently a member of the local `Administrators` group.
+
+### Step 2: Graceful Removal from the Domain
+
+Instead of just clicking "Workgroup," we want to signal the change to the OS.
+
+1. Open **sysdm.cpl** (System Properties).
+2. Click **Change**.
+3. Select **Workgroup** and type a generic name (e.g., `TEMPWORK`).
+4. **Do not restart yet** if you want to be thorough.
+
+### Step 3: AD Metadata Cleanup (The "Tier 3" Step)
+
+To ensure a clean rejoin, you should verify the state of the object on the DC side.
+
+1. On the Domain Controller (or via RSAT), open **Active Directory Users and Computers**.
+2. Locate the problematic computer object.
+3. **Right-click > Delete** the object (or "Reset Account" if you want to keep the SID, though a delete/recreate is cleaner for persistent errors).
+4. **Wait for replication:** If you have multiple DCs, ensure the deletion has replicated across the site before proceeding.
+
+### Step 4: The Local Reset
+
+On the workstation, you need to clear the DNS and Kerberos state.
+
+1. Open PowerShell as Administrator.
+2. Run the following to clear the resolver cache and existing tickets:
+```powershell
+ipconfig /flushdns
+klist purge -li 0x3e7  # Purges Kerberos tickets for the System account
+
+```
+
+
+3. **Restart the computer.** This clears the volatile memory and confirms the machine is now fully in a Workgroup state.
+
+### Step 5: The Domain Rejoin
+
+1. Log in using the **Local Administrator** account.
+2. Ensure the DNS settings are pointing to your **Internal Domain Controllers** (referencing your earlier points on DNS resolution).
+3. Go back to **sysdm.cpl > Change**.
+4. Select **Domain** and enter the FQDN (e.g., `corp.deloitte.com`).
+5. Enter Domain Admin (or Account Operator) credentials when prompted.
+
+### Step 6: Verification
+
+Once the machine restarts and you log back in with a domain account, verify the Secure Channel using PowerShell:
+
+```powershell
+Test-ComputerSecureChannel -Verify -Verbose
+
+```
+
+If it returns **True**, the trust relationship is restored.
+
+---
+
+## The "Expert" Shortcut (No Reboot Method)
+
+If you can't afford a double reboot, you can try to "Repair" the channel without leaving the domain:
+
+1. Open PowerShell as Admin.
+2. Run: `Reset-ComputerMachinePassword`
+3. If that fails, use: `Test-ComputerSecureChannel -Repair -Credential (Get-Credential)`
+
+This attempts to renegotiate the password with the DC in real-time. If it works, you've saved yourself 10 minutes of downtime!
+
