@@ -263,3 +263,89 @@ sfc /scannow
 * **Hardware Malfunction?** Disable in Device Manager to isolate.
 * **Stuck Driver?** Use `pnputil` to scrub the Driver Store.
 * **Still Broken?** Run DISM/SFC to ensure the OS integrity isn't the root cause.
+
+This is the "Bread and Butter" of a Technical Support Engineer's daily life. When the hardware is healthy and the drivers are clean, the battle moves to the **Network Stack**.
+
+Here is your expert guide to levels 7 through 14.
+
+---
+
+## 07. Updating Device Drivers
+
+Updating isn't just about getting the "latest" version; it's about stability.
+
+* **The Best Practice:** Always download drivers directly from the manufacturer (OEM) rather than relying solely on Windows Update.
+* **The Rollback:** If an update fails, use the **Roll Back Driver** button in Device Manager Properties. This is your safety net.
+
+## 08. Verifying IP Address Assignments
+
+Use `ipconfig /all`. Look for:
+
+* **IPv4 Address:** Ensure it’s in the expected range (e.g., `10.x.x.x` or `192.168.x.x`).
+* **169.254.x.x (APIPA):** This is a red flag. It means the machine couldn't talk to a DHCP server and assigned itself a "link-local" address. Communication will be limited.
+
+## 09. The Ping Test
+
+The goal is to find where the "break" is in the chain. Follow this sequence:
+
+1. `ping 127.0.0.1` (Loopback): Tests if the NIC is alive.
+2. `ping [Your_IP]`: Tests the local stack.
+3. `ping [Gateway_IP]`: Tests your connection to the router/switch.
+4. `ping 8.8.8.8`: Tests connectivity to the outside world.
+
+## 10. Testing DNS Name Resolution
+
+If you can ping `8.8.8.8` but cannot reach `google.com`, you have a DNS issue.
+
+* **Fixing the DNS Cache:** The resolver cache might be storing a "poisoned" or outdated record.
+* Command: `ipconfig /flushdns`
+
+
+* **Verify DNS:** Use `nslookup google.com`. It will show you which DNS server is responding (or failing).
+
+---
+
+## 12. Using the Network Troubleshooter
+
+For a new engineer, don't overlook the built-in Windows Troubleshooter (**Settings > System > Troubleshoot**).
+
+* **What it actually does:** It resets the network adapter, clears the ARP cache, and restarts the NLA service automatically. It’s a great "First Step" while you’re gathering more info from the user.
+
+## 13. Fixing Wi-Fi Connectivity
+
+If a user is "Connected, no internet":
+
+1. **Check IP:** Is it APIPA?
+2. **DHCP vs. Static:** Ensure "Obtain an IP address automatically" is selected unless the corporate policy requires a Static IP.
+3. **DNS Settings:** Often, manually setting DNS to `8.8.8.8` or `1.1.1.1` can bypass ISP-related outages.
+
+---
+
+## 14. Hyper-V Troubleshooting & Setup
+
+Hyper-V changes how networking works because it introduces a **Virtual Switch**.
+
+### Steps to Install Hyper-V on Windows 10/11:
+
+1. Run PowerShell as Admin:
+```powershell
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+
+```
+
+
+2. **Restart is required.**
+
+### Creating a Virtual Switch:
+
+This is the "bridge" between the VM and the physical network.
+
+* **External Switch:** Maps to your physical NIC. Use this if the VM needs internet access.
+* **Internal Switch:** Only allows communication between the Host and the VM.
+* **Private Switch:** Only allows communication between VMs.
+
+### The "Hyper-V Network" Trap:
+
+When you create an **External Virtual Switch**, Windows creates a "Bridge Adapter." Your physical NIC will no longer have an IP; instead, the "Virtual Ethernet Adapter" handles the traffic. If you lose internet after installing Hyper-V, check the **Virtual Switch Manager** to ensure the bridge was created correctly.
+
+---
