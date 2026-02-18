@@ -46,3 +46,84 @@ When a user says "I can't access the shared drive," don't just restart the Works
 2. **Check NLA:** Does the computer realize it's on the corporate network? (Check the Network and Sharing Center).
 3. **Start and Monitor:** Attempt to start the service manually while keeping the **Event Viewer** open. If it fails, the error code (e.g., Error 1068: The dependency service or group failed to start) will point you exactly where to look next.
 
+Excellent follow-up. In a high-stakes environment, the GUI is often too slow. As an expert, you’ll find that **PowerShell** provides the surgical precision you need, while **Device Manager** acts as your hardware-to-software bridge.
+
+Let’s break these down.
+
+---
+
+## 1. Using PowerShell to Start Failed Services
+
+When a service fails to start via the GUI, it often swallows the real error message. PowerShell allows you to see the raw output and automate the recovery of multiple services at once.
+
+### Identify and Filter
+
+Don't just look for "Stopped" services; look for those set to **Automatic** that aren't running. These are your "True Failures."
+
+```powershell
+# Get all services that should be running but aren't
+Get-Service | Where-Object { $_.Status -eq "Stopped" -and $_.StartType -eq "Automatic" }
+
+```
+
+### The "Start-Service" Command
+
+To attempt a start, we use `Start-Service`. However, as an expert, you should use the `-PassThru` parameter to see the result immediately.
+
+```powershell
+# Attempt to start a specific service (e.g., Print Spooler)
+Start-Service -Name "Spooler" -PassThru
+
+```
+
+### Bulk Recovery (The "Nuclear" Option)
+
+If a server just rebooted and several services are hanging, you can pipe them all into a start command:
+
+```powershell
+Get-Service | Where-Object { $_.Status -eq "Stopped" -and $_.StartType -eq "Automatic" } | Start-Service
+
+```
+
+> **Expert Note:** If this fails, PowerShell will return a **CategoryInfo: InvalidOperation**. This usually confirms a **Dependency failure** (one of the services in the "Dependencies" tab we discussed earlier is also stopped).
+
+---
+
+## 2. Using Device Manager for Failed Devices
+
+Hardware issues often manifest as service failures. If the "Print Spooler" won't start, it might be because the actual printer hardware is showing a "Code 10" in Device Manager.
+
+### Identifying Symbols
+
+When you open `devmgmt.msc`, look for these three visual cues:
+
+* **Yellow Exclamation Mark (!):** The device is physically present, but the driver is failing or incompatible.
+* **Red "X" or Down Arrow:** The device is manually disabled.
+* **"Unknown Device":** Windows has no idea what this is—usually a chipset or proprietary driver issue.
+
+### Critical Error Codes to Know
+
+When you right-click a failed device and select **Properties**, look at the "Device Status" box.
+
+* **Code 10 (This device cannot start):** Usually a driver version mismatch or a hardware communication error.
+* **Code 22 (The device is disabled):** Simply right-click and select "Enable."
+* **Code 43 (Windows has stopped this device):** This is often a physical hardware failure or a power-state issue.
+
+### The Expert "Ghost" Trick
+
+Sometimes a device is failing, but it's not even showing up because it's "disconnected" or "hidden." To see these "ghost" devices:
+
+1. In Device Manager, click **View**.
+2. Select **Show hidden devices**.
+3. Look for translucent icons. This is vital for troubleshooting "duplicate" drivers or old hardware remnants that are causing conflicts with your services.
+
+---
+
+### The Bridge: Linking Devices to Services
+
+If you find a failed device in Device Manager, your next step is to find the **Service Name** associated with that driver.
+
+1. In the device Properties, go to the **Details** tab.
+2. Select **Service** from the dropdown.
+3. Go back to PowerShell and check the status of *that* specific service name.
+
