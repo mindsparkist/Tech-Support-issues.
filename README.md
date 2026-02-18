@@ -432,3 +432,78 @@ If you can't afford a double reboot, you can try to "Repair" the channel without
 
 This attempts to renegotiate the password with the DC in real-time. If it works, you've saved yourself 10 minutes of downtime!
 
+Since you’re stepping into a Tier 3 role, understanding **Group Policy Objects (GPO)** is vital. When a machine rejoins the domain, it’s like a fresh start—but if the GPOs don't apply correctly, your user might lose their mapped drives, printers, or security permissions.
+
+Here is the advanced guide to forcing and verifying GPO application.
+
+---
+
+## 1. The Force Update (`gpupdate`)
+
+The standard command is `gpupdate /force`, but as a senior engineer, you need to understand the flags:
+
+* **/force:** Re-applies all policy settings, even if they haven't changed.
+* **/boot:** Restarts the computer after the update (necessary for software installation policies).
+* **/logoff:** Logs the user out (necessary for folder redirection or user-side scripts).
+
+## 2. The "Resultant Set of Policy" (RSoP)
+
+When a policy isn't working, you need to see exactly what the computer *thinks* it should be doing.
+
+* **Command:** `gpresult /r`
+* **What to look for:**
+* **Applied Group Policy Objects:** These are the winners.
+* **The following GPOs were not applied because they were filtered out:** This tells you if there is a WMI filter or a security group permission issue.
+
+
+
+---
+
+## 3. Advanced Troubleshooting: The HTML Report
+
+The `/r` flag is good for a quick look, but for a deep dive, generate an HTML report. It’s much easier to read and share with your team.
+
+```powershell
+gpresult /h C:\temp\GPO_Report.html
+
+```
+
+Open this file in a browser. It will show you "Winning GPOs" and exactly which setting is being overridden by another policy.
+
+---
+
+## 4. Common Post-Rejoin GPO Issues
+
+After a "Workstation Trust" fix, you might encounter these two specific headaches:
+
+### A. Slow Link Detection
+
+If the machine is on a slow Wi-Fi connection, Windows may skip "heavy" GPOs (like software installation).
+
+* **Fix:** You can disable Slow Link Detection in the registry or via a local policy if the Hyderabad office network is undergoing maintenance.
+
+### B. Replication Latency (The "Wait" Factor)
+
+If you moved the computer to a new **Organizational Unit (OU)** in AD, the local machine might still be looking for policies from the old OU.
+
+* **Fix:** Verify which Domain Controller the machine is talking to:
+```powershell
+echo %LOGONSERVER%
+
+```
+
+
+If that DC hasn't synced with the one where you made the changes, the GPO won't apply.
+
+---
+
+## Your "First Week" Technical Cheat Sheet
+
+
+| Task | Command |
+| --- | --- |
+| **Trust Issues** | `Test-ComputerSecureChannel -Verify` |
+| **Driver Scrub** | `pnputil /delete-driver oemXX.inf /force` |
+| **DNS Cleanup** | `ipconfig /flushdns` |
+| **GPO Audit** | `gpresult /h report.html` |
+| **Service Status** | `Get-Service |
